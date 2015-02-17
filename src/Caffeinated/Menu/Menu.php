@@ -4,6 +4,7 @@ namespace Caffeinated\Menu;
 use Collective\Html\HtmlBuilder;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\View\Factory;
+use Illuminate\Config\Repository;
 
 class Menu
 {
@@ -47,11 +48,12 @@ class Menu
 	 */
 	protected $view;
 
-	public function __construct(HtmlBuilder $html, UrlGenerator $url, Factory $view)
+	public function __construct(HtmlBuilder $html, UrlGenerator $url, Factory $view, Repository $config)
 	{
-		$this->html = $html;
-		$this->url  = $url;
-		$this->view = $view;
+		$this->html   = $html;
+		$this->url    = $url;
+		$this->view   = $view;
+		$this->config = $config;
 	}
 
 	/**
@@ -197,6 +199,14 @@ class Menu
 	/**
 	 *
 	 */
+	public function roots()
+	{
+		return $this->whereParent();
+	}
+
+	/**
+	 *
+	 */
 	public function whereParent($parent = 0)
 	{
 		return array_filter($this->menu, function($item) use ($parent) {
@@ -221,6 +231,30 @@ class Menu
 	public function asUl($attributes = array())
 	{
 		return "<ul{$this->html->attributes($attributes)}>{$this->render('ul')}</ul>";
+	}
+
+	/**
+	 * 
+	 */
+	public function asOl($attributes = array())
+	{
+		return "<ol{$this->html->attributes($attributes)}>{$this->render('ol')}</ol>";
+	}
+
+	/**
+	 *
+	 */
+	public function asDiv($attributes = array())
+	{
+		return "<div{$this->html->attributes($attributes)}>{$this->render('div')}</div>";
+	}
+
+	/**
+	 *
+	 */
+	public function asView($view, $name = 'menu')
+	{
+		return $this->view->make($view, [$name => $this]);
 	}
 
 	/**

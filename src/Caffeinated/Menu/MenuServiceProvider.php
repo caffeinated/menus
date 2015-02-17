@@ -13,28 +13,12 @@ class MenuServiceProvider extends ServiceProvider {
 	protected $defer = true;
 
 	/**
-	 * Boot the service provider.
-	 *
-	 * @return null
-	 */
-	public function boot()
-	{
-		// $this->publishes([
-		// 	__DIR__.'/../../config/menu.php' => config_path('menu.php')
-		// ]);
-	}
-
-	/**
 	 * Register the service provider.
 	 *
 	 * @return void
 	 */
 	public function register()
 	{
-		// $this->mergeConfigFrom(
-		//     __DIR__.'/../../config/menu.php', 'menu'
-		// );
-
 		$this->registerServices();
 	}
 
@@ -56,7 +40,7 @@ class MenuServiceProvider extends ServiceProvider {
 	protected function registerServices()
 	{
 		$this->app->bindShared('menu', function($app) {
-			return new Menu($app['html'], $app['url'], $app['view']);
+			return new Menu($app['html'], $app['url'], $app['view'], $app['config']);
 		});
 	}
 }

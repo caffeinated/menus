@@ -85,6 +85,14 @@ class Item
 	/**
 	 *
 	 */
+	public function getId()
+	{
+		return $this->id;
+	}
+
+	/**
+	 *
+	 */
 	public function getPid()
 	{
 		return $this->pid;
@@ -104,5 +112,13 @@ class Item
 	public function link()
 	{
 		return "<a href=\"{$this->link->getUrl()}\"{$this->menu->html->attributes($this->link->attributes)}>{$this->link->getText()}</a>";
+	}
+
+	/**
+	 *
+	 */
+	public function children()
+	{
+		return $this->menu->whereParent($this->id);
 	}
 }

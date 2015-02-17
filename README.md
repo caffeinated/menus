@@ -44,3 +44,54 @@ Caffeinated Menu will automatically register the menu as a view composer (prepen
 ```php
 {!! $menu_public->asUl() !!}
 ```
+
+More documentation coming soon
+------------------------------
+
+### Example Bootstrap menu template
+
+
+#### Twig
+
+**navbar.twig.php**
+```php
+<nav class="navbar navbar-inverse" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+
+			<a href="#" class="navbar-brand">Caffeinated Menu</a>
+		</div>
+
+		<div class="collapse navbar-collapse" id="menu-collapse">
+			<ul class="nav navbar-nav">
+				{{ include('partials.menu.items', {'items': menu_public.roots()}) }}
+			</ul>
+		</div>
+	</div>
+</nav>
+```
+
+**items.twig.php**
+```php
+{% for item in items %}
+	<li {{ (item.hasChildren()) ? 'class="dropdown"' : null }}>
+		<a href="{{ item.url() }}" {{ (item.hasChildren()) ? 'class="dropdown-toggle" data-toggle="dropdown"' : null }}>
+			{{ item.title }} {{ (item.hasChildren()) ? '<b class="caret"></b>' : null }}
+		</a>
+
+		{% if (item.hasChildren()) %}
+			<ul class="dropdown-menu">
+				{% for child in item.children() %}
+					<li><a href="{{ child.url() }}">{{ child.title }}</a></li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+	</li>
+{% endfor %}
+```

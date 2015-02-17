@@ -4,98 +4,113 @@ namespace Caffeinated\Menu;
 class Item
 {
 	/**
-	 * @var array
+	 *
 	 */
+	protected $builder;
+
+	public $id;
+
+	public $title;
+
+	public $slug;
+
+	public $divider;
+
+	public $parent;
+
+	protected $data = array();
+
 	public $attributes = array();
 
 	/**
-	 * @var int
-	 */
-	private $id;
-
-	/**
-	 * @var \Caffeinated\Menu\Menu
-	 */
-	private $menu;
-
-	/**
-	 * @var array
-	 */
-	public $meta;
-
-	/**
-	 * @var int
-	 */
-	private $pid;
-
-	/**
-	 * @var string
-	 */
-	public $title;
-
-	/**
-	 * Constructor.
 	 *
-	 * @param \Caffeinated\Menu\Menu  $menu
-	 * @param string                  $title
-	 * @param string                  $url
-	 * @param array                   $attributes
-	 * @param int                     $pid
 	 */
-	public function __construct($menu, $title, $url, $attributes = array(), $pid = 0)
+	public function __construct($builder, $id, $title, $options)
 	{
-		$this->menu       = $menu;
+		$this->builder    = $builder;
+		$this->id         = $id;
 		$this->title      = $title;
-		$this->url        = $url;
-		$this->attributes = $attributes;
-		$this->pid        = $pid;
+		$this->slug       = camel_case($title);
+		$this->attributes = $this->builder->extractAttributes($options);
+		$this->parent     = (is_array($options) and isset($options['parent'])) ? $options['parent'] : null;
 
-		$this->id         = $this->id();
-		$this->link       = new Link($title, $url);
+		$this->configureLink($options);
 	}
 
 	/**
-	 * Add a subitem to the menu
 	 *
-	 * @param  string        $title
-	 * @param  string|array  $action
-	 * @return \Caffeinated\Menu\Menu
 	 */
-	public function add($title, $action)
+	public function configureLink($options)
 	{
-		if (! is_array($action)) {
-			$url           = $action;
-			$action        = array();
-			$action['url'] = $url;
+		if (! is_array($options)) {
+			$path = ['url' => $options];
+		} elseif (isset($options['raw']) and $options['raw'] == true) {
+			$path = null;
+		} else {
+			$path = array_only($options, ['url', 'route', 'action', 'secure']);
 		}
 
-		$action['pid'] = $this->id;
+		if (! is_null($path)) {
+			$path['prefix'] = $this->builder->getLastGroupPrefix();
+		}
 
-		return $this->menu->add($title, $action);
-	}
+		$this->link = $path ? new Link($path) : null;
 
-	/**
-	 * 
-	 */
-	protected function id()
-	{
-		return count($this->menu->menu) + 1;
-	}
-
-	/**
-	 *
-	 */
-	public function getId()
-	{
-		return $this->id;
+		if ($this->builder->config('auto_active') === true) {
+			$this->checkActiveStatus();
+		}
 	}
 
 	/**
 	 *
 	 */
-	public function getPid()
+	public function add($title, $options = '')
 	{
-		return $this->pid;
+		if (!is_array($options)) {
+			$url            = $options;
+			$options        = array();
+			$options['url'] = $url;
+		}
+
+		$options['parent'] = $this->id;
+
+		return $this->builder->add($title, $options);
+	}
+
+	/**
+	 *
+	 */
+	public function attributes()
+	{
+		$args = func_get_args();
+
+		if (isset($args[0]) and is_array($args[0])) {
+			$this->attributes = array_merge($this->attributes, $args[0]);
+
+			return $this;
+		} elseif (isset($args[0]) and isset($args[1])) {
+			$this->attributes[$args[0]] = $args[1];
+
+			return $this;
+		} elseif (isset($args[0])) {
+			return isset($this->attributes[$args[0]]) ? $this->attributes[$args[0]] : null;
+		}
+
+		return $this->attributes;
+	}
+
+	/**
+	 *
+	 */
+	public function url()
+	{
+		if (! is_null($this->link)) {
+			if ($this->link->href) {
+				return $this->link->href;
+			}
+
+			return $this->builder->dispatch($this->link->path);
+		}
 	}
 
 	/**
@@ -103,22 +118,6 @@ class Item
 	 */
 	public function hasChildren()
 	{
-		return (count($this->menu->whereParent($this->id))) ? true : false;
-	}
-
-	/**
-	 *
-	 */
-	public function link()
-	{
-		return "<a href=\"{$this->link->getUrl()}\"{$this->menu->html->attributes($this->link->attributes)}>{$this->link->getText()}</a>";
-	}
-
-	/**
-	 *
-	 */
-	public function children()
-	{
-		return $this->menu->whereParent($this->id);
+		return count($this->builder->whereParent($this->id)) or false;
 	}
 }

@@ -3,32 +3,33 @@ namespace Caffeinated\Menu;
 
 class Link
 {
-	public $text;
+	public $path = array();
 
-	public $url;
+	public $href;
 
-	public $attributes;
+	public $attributes = array();
 
-	public function __construct($text, $url, $attributes = array())
+	public function __construct($path = array())
 	{
-		$this->text       = $text;
-		$this->url        = $url;
-		$this->attributes = $attributes;
+		$this->path = $path;
 	}
 
-	/**
-	 *
-	 */
-	public function getUrl()
+	public function attr()
 	{
-		return $this->url;
-	}
+		$args = func_get_args();
 
-	/**
-	 *
-	 */
-	public function getText()
-	{
-		return $this->text;
+		if (isset($args[0]) and is_array($args[0])) {
+			$this->attributes = array_merge($this->attributes, $args[0]);
+
+			return $this;
+		} elseif (isset($args[0]) and isset($args[1])) {
+			$this->attributes[$args[0]] = $args[1];
+
+			return $this;
+		} elseif (isset($args[0])) {
+			return isset($this->attributes[$args[0]]) ? $this->attributes[$args[0]] : null;
+		}
+
+		return $this->attributes;
 	}
 }

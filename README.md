@@ -42,5 +42,5 @@ The best location to do this is to create a new service provider within your app
 Caffeinated Menu will automatically register the menu as a view composer (prepending your defined menu name with `menu_`) for all your views. Rendering your menu is simple:
 
 ```php
-{!! menu_public->asUl() !!}
+{!! $menu_public->asUl() !!}
 ```

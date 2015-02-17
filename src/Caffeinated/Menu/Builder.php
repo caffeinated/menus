@@ -7,44 +7,52 @@ use Illuminate\Routing\UrlGenerator;
 class Builder
 {
 	/**
-	 *
+	 * @var array
 	 */
 	protected $items;
 
 	/**
-	 *
+	 * @var \Collective\Html\HtmlBuilder
 	 */
 	protected $html;
 
 	/**
-	 *
+	 * @var string
 	 */
 	protected $name;
 
 	/**
-	 *
+	 * @var array
 	 */
 	protected $config;
 
 	/**
-	 *
+	 * @var array
 	 */
 	protected $groupStack = array();
 
 	/**
-	 *
+	 * @var array
 	 */
 	protected $reserved = ['route', 'action', 'url', 'prefix', 'parent', 'secure', 'raw'];
 
 	/**
-	 *
+	 * @var int
 	 */
 	protected $lastId;
 
+	/**
+	 * @var \Illuminate\Routing\UrlGenerator
+	 */
 	protected $url;
 
 	/**
+	 * Constructor.
 	 *
+	 * @param string                            $name
+	 * @param array                             $config
+	 * @param \Collective\Html\HtmlBuilder      $html
+	 * @param \Illuminate\Routing\UrlGenerator  $url
 	 */
 	public function __construct($name, $config, HtmlBuilder $html, UrlGenerator $url)
 	{
@@ -56,7 +64,11 @@ class Builder
 	}
 
 	/**
+	 * Add an item to the defined menu.
 	 *
+	 * @param  string  $title
+	 * @param  array   $options
+	 * @return \Caffeinated\Menu\Item
 	 */
 	public function add($title, $options = '')
 	{
@@ -70,7 +82,9 @@ class Builder
 	}
 
 	/**
+	 * Generate a unique ID for every item added to the menu.
 	 *
+	 * @return int
 	 */
 	protected function id()
 	{
@@ -78,7 +92,10 @@ class Builder
 	}
 
 	/**
+	 * Extract the valid attributes from the passed options.
 	 *
+	 * @param  array  $options
+	 * @return array
 	 */
 	public function extractAttributes($options = array())
 	{
@@ -94,7 +111,10 @@ class Builder
 	}
 
 	/**
+	 * Converts the defined attributes into HTML.
 	 *
+	 * @param  array  $attributes
+	 * @return string
 	 */
 	public function attributes($attributes = array())
 	{
@@ -102,7 +122,9 @@ class Builder
 	}
 
 	/**
+	 * Returns all items with no parents.
 	 *
+	 * @return \Illuminate\Support\Collection
 	 */
 	public function roots()
 	{
@@ -117,7 +139,10 @@ class Builder
 	*/
 
 	/**
+	 * Get the action type from the options.
 	 *
+	 * @param  array  $options
+	 * @return string
 	 */
 	public function dispatch($options)
 	{
@@ -133,7 +158,10 @@ class Builder
 	}
 
 	/**
+	 * Get the action for a "url" option.
 	 *
+	 * @param  array|string  $options
+	 * @return string
 	 */
 	protected function getUrl($options)
 	{

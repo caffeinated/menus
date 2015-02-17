@@ -101,6 +101,14 @@ class Builder
 		return $this->html->attributes($attributes);
 	}
 
+	/**
+	 *
+	 */
+	public function roots()
+	{
+		return $this->whereParent();
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Dispatch Methods

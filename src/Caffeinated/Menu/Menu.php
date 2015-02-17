@@ -23,6 +23,9 @@ class Menu
 	 */
 	protected $html;
 
+	/**
+	 *
+	 */
 	protected $url;
 
 	/**
@@ -81,14 +84,6 @@ class Menu
 	public function get($key)
 	{
 		return $this->collection->get($key);
-	}
-
-	/**
-	 *
-	 */
-	public function getCollection()
-	{
-		return $this->collection;
 	}
 
 	/**

@@ -121,6 +121,17 @@ class Item
 		return count($this->builder->whereParent($this->id)) or false;
 	}
 
+	/**
+	 * 
+	 */
+	public function children()
+	{
+		return $this->builder->whereParent($this->id);
+	}
+
+	/**
+	 *
+	 */
 	public function __get($property)
 	{
 		if (property_exists($property)) {

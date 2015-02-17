@@ -2,6 +2,7 @@
 namespace Caffeinated\Menu;
 
 use Collective\Html\HtmlBuilder;
+use Illuminate\Routing\UrlGenerator;
 
 class Builder
 {
@@ -40,14 +41,17 @@ class Builder
 	 */
 	protected $lastId;
 
+	protected $url;
+
 	/**
 	 *
 	 */
-	public function __construct($name, $config, $html)
+	public function __construct($name, $config, HtmlBuilder $html, UrlGenerator $url)
 	{
 		$this->name   = $name;
 		$this->config = $config;
 		$this->html   = $html;
+		$this->url    = $url;
 		$this->items  = new Collection;
 	}
 
@@ -99,6 +103,55 @@ class Builder
 
 	/*
 	|--------------------------------------------------------------------------
+	| Dispatch Methods
+	|--------------------------------------------------------------------------
+	|
+	*/
+
+	/**
+	 *
+	 */
+	public function dispatch($options)
+	{
+		if (isset($options['url'])) {
+			return $this->getUrl($options);
+		} elseif (isset($options['route'])) {
+			return $this->getRoute($options['route']);
+		} elseif (isset($options['action'])) {
+			return $this->getcontrollerAction($options['action']);
+		}
+
+		return null;
+	}
+
+	/**
+	 *
+	 */
+	protected function getUrl($options)
+	{
+		foreach ($options as $key => $value) {
+			$$key = $value;
+		}
+
+		$secure = (isset($options['secure']) and $options['secure'] === true) ? true : false;
+
+		if (is_array($url)) {
+			if (self::isAbs($url[0])) {
+				return $url[0];
+			}
+
+			return $this->url->to($prefix.'/'.$url[0], array_slice($url, 1), $secure);
+		}
+
+		if (self::isAbs($url)) {
+			return $url;
+		}
+
+		return $this->url->to($prefix.'/'.$url, array(), $secure);
+	}
+
+	/*
+	|--------------------------------------------------------------------------
 	| Rendering Methods
 	|--------------------------------------------------------------------------
 	|
@@ -122,7 +175,7 @@ class Builder
 	
 		foreach ($this->whereParent($parent) as $item) {
 			$items .= "<{$itemTag}{$this->attributes($item->attributes())}>";
-	
+
 			if ($item->link) {
 				$items .= "<a{$this->attributes($item->link->attr())} href=\"{$item->url()}\">{$item->title}</a>";
 			} else {

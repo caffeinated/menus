@@ -3,6 +3,7 @@ namespace Caffeinated\Menu;
 
 use Collective\Html\HtmlBuilder;
 use Illuminate\Config\Repository;
+use Illuminate\Routing\UrlGenerator;
 use Illuminate\View\Factory;
 
 class Menu
@@ -22,6 +23,8 @@ class Menu
 	 */
 	protected $html;
 
+	protected $url;
+
 	/**
 	 *
 	 */
@@ -30,11 +33,12 @@ class Menu
 	/**
 	 * Constructor.
 	 */
-	public function __construct(Repository $config, Factory $view, HtmlBuilder $html)
+	public function __construct(Repository $config, Factory $view, HtmlBuilder $html, UrlGenerator $url)
 	{
 		$this->config     = $config;
 		$this->view       = $view;
 		$this->html       = $html;
+		$this->url        = $url;
 		$this->collection = new Collection;
 	}
 
@@ -44,7 +48,7 @@ class Menu
 	public function make($name, $callback)
 	{
 		if (is_callable($callback)) {
-			$menu = new Builder($name, $this->loadConfig($name), $this->html);
+			$menu = new Builder($name, $this->loadConfig($name), $this->html, $this->url);
 
 			call_user_func($callback, $menu);
 
@@ -92,8 +96,6 @@ class Menu
 	 */
 	public function all()
 	{
-		dd($this->collection);
-
 		return $this->collection;
 	}
 }

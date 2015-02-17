@@ -3,15 +3,25 @@ namespace Caffeinated\Menu;
 
 class Link
 {
-	public $path = array();
+	protected $path = array();
 
-	public $href;
+	protected $href;
 
 	public $attributes = array();
 
 	public function __construct($path = array())
 	{
 		$this->path = $path;
+	}
+
+	/**
+	 *
+	 */
+	public function href($href)
+	{
+		$this->href = $href;
+
+		return $this;
 	}
 
 	public function attr()
@@ -31,5 +41,14 @@ class Link
 		}
 
 		return $this->attributes;
+	}
+
+	public function __get($property)
+	{
+		if (property_exists($this, $property)) {
+			return $this->$property;
+		}
+
+		return $this->attr($property);
 	}
 }

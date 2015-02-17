@@ -40,7 +40,7 @@ class MenuServiceProvider extends ServiceProvider {
 	protected function registerServices()
 	{
 		$this->app->bindShared('menu', function($app) {
-			return new Menu($app['config'], $app['view'], $app['html']);
+			return new Menu($app['config'], $app['view'], $app['html'], $app['url']);
 		});
 	}
 }

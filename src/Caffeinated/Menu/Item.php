@@ -54,7 +54,7 @@ class Item
 			$path['prefix'] = $this->builder->getLastGroupPrefix();
 		}
 
-		$this->link = $path ? new Link($path) : null;
+		$this->link = isset($path) ? new Link($path) : null;
 
 		if ($this->builder->config('auto_active') === true) {
 			$this->checkActiveStatus();
@@ -66,7 +66,7 @@ class Item
 	 */
 	public function add($title, $options = '')
 	{
-		if (!is_array($options)) {
+		if (! is_array($options)) {
 			$url            = $options;
 			$options        = array();
 			$options['url'] = $url;
@@ -119,5 +119,14 @@ class Item
 	public function hasChildren()
 	{
 		return count($this->builder->whereParent($this->id)) or false;
+	}
+
+	public function __get($property)
+	{
+		if (property_exists($property)) {
+			return $this->$property;
+		}
+
+		return $this->data($property);
 	}
 }

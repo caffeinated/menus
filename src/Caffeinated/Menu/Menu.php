@@ -9,32 +9,37 @@ use Illuminate\View\Factory;
 class Menu
 {
 	/**
-	 *
+	 * @var \Caffeinated\Menu\Collection
 	 */
 	protected $collection;
 
 	/**
-	 *
+	 * @var \Illuminate\Config\Repository
 	 */
 	protected $config;
 
 	/**
-	 *
+	 * @var \Collective\Html\HtmlBuilder
 	 */
 	protected $html;
 
 	/**
-	 *
+	 * @var \Illuminate\Routing\UrlGenerator
 	 */
 	protected $url;
 
 	/**
-	 *
+	 * @var \Illuminate\View\Factory
 	 */
 	protected $view;
 
 	/**
 	 * Constructor.
+	 *
+	 * @param  \Illuminate\Config\Repository     $config
+	 * @param  \Illuminate\View\Factory          $view
+	 * @param  \Collective\Html\HtmlBuilder      $html
+	 * @param  \Illuminate\Routing\UrlGenerator  $url
 	 */
 	public function __construct(Repository $config, Factory $view, HtmlBuilder $html, UrlGenerator $url)
 	{
@@ -46,7 +51,11 @@ class Menu
 	}
 
 	/**
+	 * Create a new menu instance.
 	 *
+	 * @param  string    $name
+	 * @param  callable  $callback
+	 * @return \Caffeinated\Menu\Builder
 	 */
 	public function make($name, $callback)
 	{
@@ -64,7 +73,10 @@ class Menu
 	}
 
 	/**
+	 * Loads and merges configuration data.
 	 *
+	 * @param  string  $name
+	 * @return array
 	 */
 	public function loadConfig($name)
 	{
@@ -79,7 +91,10 @@ class Menu
 	}
 
 	/**
-	 * 
+	 * Find and return the given menu collection.
+	 *
+	 * @param  string  $key
+	 * @return \Caffeinated\Menu\Collection
 	 */
 	public function get($key)
 	{
@@ -87,7 +102,9 @@ class Menu
 	}
 
 	/**
+	 * Returns all menu instances.
 	 *
+	 * @return \Caffeinated\Menu\Collection
 	 */
 	public function all()
 	{

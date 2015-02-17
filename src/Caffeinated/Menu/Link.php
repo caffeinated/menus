@@ -3,19 +3,36 @@ namespace Caffeinated\Menu;
 
 class Link
 {
+	/**
+	 * @var array
+	 */
 	protected $path = array();
 
+	/**
+	 * @var string
+	 */
 	protected $href;
 
+	/**
+	 * @var array
+	 */
 	public $attributes = array();
 
+	/**
+	 * Constructor.
+	 *
+	 * @param array  $path
+	 */
 	public function __construct($path = array())
 	{
 		$this->path = $path;
 	}
 
 	/**
+	 * Set the link's href property.
 	 *
+	 * @param  string  $href
+	 * @return \Caffeinated\Menu\Link
 	 */
 	public function href($href)
 	{
@@ -24,6 +41,12 @@ class Link
 		return $this;
 	}
 
+	/**
+	 * Add attributes to the link.
+	 *
+	 * @param  mixed
+	 * @return \Caffeinated\Menu\Link|string
+	 */
 	public function attr()
 	{
 		$args = func_get_args();
@@ -43,6 +66,12 @@ class Link
 		return $this->attributes;
 	}
 
+	/**
+	 * Dynamically retrieve property value.
+	 *
+	 * @param  string  $property
+	 * @return mixed
+	 */
 	public function __get($property)
 	{
 		if (property_exists($this, $property)) {

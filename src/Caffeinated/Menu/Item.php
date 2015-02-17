@@ -4,26 +4,52 @@ namespace Caffeinated\Menu;
 class Item
 {
 	/**
-	 *
+	 * @var \Caffeinated\Menu\Builder
 	 */
 	protected $builder;
 
+	/**
+	 * @var int
+	 */
 	public $id;
 
+	/**
+	 * @var string
+	 */
 	public $title;
 
+	/**
+	 * @var string
+	 */
 	public $slug;
 
-	public $divider;
+	/**
+	 * @var array
+	 */
+	public $divider = array();
 
+	/**
+	 * @var int
+	 */
 	public $parent;
 
+	/**
+	 * @var array
+	 */
 	protected $data = array();
 
+	/**
+	 * @var array
+	 */
 	public $attributes = array();
 
 	/**
+	 * Constructor.
 	 *
+	 * @param  \Caffeinated\Menu\Builder  $builder
+	 * @param  int                        $id
+	 * @param  string                     $title
+	 * @param  array|string               $options
 	 */
 	public function __construct($builder, $id, $title, $options)
 	{
@@ -38,7 +64,10 @@ class Item
 	}
 
 	/**
+	 * Configures the link for the menu item.
 	 *
+	 * @param  array|string  $options
+	 * @return null
 	 */
 	public function configureLink($options)
 	{
@@ -62,7 +91,11 @@ class Item
 	}
 
 	/**
+	 * Adds a sub item to the menu.
 	 *
+	 * @param  string        $title
+	 * @param  array|string  $options
+	 * @return void
 	 */
 	public function add($title, $options = '')
 	{
@@ -78,7 +111,10 @@ class Item
 	}
 
 	/**
+	 * Add attributes to the menu item.
 	 *
+	 * @param  mixed
+	 * @return \Caffeinated\Menu\Item|string
 	 */
 	public function attributes()
 	{
@@ -100,7 +136,9 @@ class Item
 	}
 
 	/**
+	 * Generates a valid URL for the menu item.
 	 *
+	 * @return string
 	 */
 	public function url()
 	{
@@ -114,7 +152,9 @@ class Item
 	}
 
 	/**
+	 * Determines if the menu item has children.
 	 *
+	 * @return bool
 	 */
 	public function hasChildren()
 	{
@@ -122,7 +162,9 @@ class Item
 	}
 
 	/**
-	 * 
+	 * Returns all children underneath the menu item.
+	 *
+	 * @return \Caffeinated\Menu\Collection
 	 */
 	public function children()
 	{
@@ -130,7 +172,10 @@ class Item
 	}
 
 	/**
+	 * Return either a property or attribute item value.
 	 *
+	 * @param  string  $property
+	 * @return string
 	 */
 	public function __get($property)
 	{

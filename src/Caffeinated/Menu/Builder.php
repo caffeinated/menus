@@ -1,6 +1,7 @@
 <?php
 namespace Caffeinated\Menu;
 
+use BadMethodCallException;
 use Collective\Html\HtmlBuilder;
 use Illuminate\Routing\UrlGenerator;
 
@@ -122,6 +123,17 @@ class Builder
 	}
 
 	/**
+	 * Return the configuration value by key.
+	 *
+	 * @param  string  $key
+	 * @return string
+	 */
+	public function config($key)
+	{
+		return $this->config[$key];
+	}
+
+	/**
 	 * Returns all items with no parents.
 	 *
 	 * @return \Illuminate\Support\Collection
@@ -129,6 +141,20 @@ class Builder
 	public function roots()
 	{
 		return $this->whereParent();
+	}
+
+	/**
+	 * Get the prefix from the last group of the stack.
+	 *
+	 * @return string
+	 */
+	public function getLastGroupPrefix()
+	{
+		if (count($this->groupStack) > 0) {
+			return array_get(last($this->groupStack), 'prefix', '');
+		}
+
+		return null;
 	}
 
 	/*
@@ -186,6 +212,17 @@ class Builder
 		return $this->url->to($prefix.'/'.$url, array(), $secure);
 	}
 
+	/**
+	 * Determines if the given URL is absolute.
+	 *
+	 * @param  string  $url
+	 * @return bool
+	 */
+	public static function isAbs($url)
+	{
+		return parse_url($url, PHP_URL_SCHEME) or false;
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Rendering Methods
@@ -194,7 +231,10 @@ class Builder
 	*/
 
 	/**
+	 * Renders the menu as an unordered list.
 	 *
+	 * @param  array  $attributes
+	 * @return string
 	 */
 	public function asUl($attributes = array())
 	{
@@ -202,7 +242,11 @@ class Builder
 	}
 
 	/**
+	 * Generate the menu items as list items, recursively.
 	 *
+	 * @param  string  $type
+	 * @param  int     $parent
+	 * @return string
 	 */
 	protected function render($type = 'ul', $parent = null)
 	{
@@ -235,7 +279,11 @@ class Builder
 	}
 
 	/**
+	 * Dynamic search method against a menu attribute.
 	 *
+	 * @param  string  $method
+	 * @param  array   $args
+	 * @return \Caffeinated\Menu\Item|bool
 	 */
 	public function __call($method, $args)
 	{
@@ -244,7 +292,7 @@ class Builder
 		if ($matches) {
 			$attribute = strtolower($matches[1]);
 		} else {
-			return false;
+			throw new BadMethodCallException('Call to undefined method '.$method);
 		}
 
 		$value     = $args ? $args[0] : null;
@@ -268,7 +316,10 @@ class Builder
 	}
 
 	/**
+	 * Returns menu item by name.
 	 *
+	 * @param  string  $property
+	 * @return \Caffeinated\Menu\Item
 	 */
 	public function __get($property)
 	{

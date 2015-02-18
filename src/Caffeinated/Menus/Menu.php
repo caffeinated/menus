@@ -1,5 +1,5 @@
 <?php
-namespace Caffeinated\Menu;
+namespace Caffeinated\Menus;
 
 use Collective\Html\HtmlBuilder;
 use Illuminate\Config\Repository;

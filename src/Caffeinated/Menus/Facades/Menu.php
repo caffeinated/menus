@@ -1,5 +1,5 @@
 <?php
-namespace Caffeinated\Menu\Facades;
+namespace Caffeinated\Menus\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

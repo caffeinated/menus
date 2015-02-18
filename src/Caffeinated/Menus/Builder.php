@@ -1,5 +1,5 @@
 <?php
-namespace Caffeinated\Menu;
+namespace Caffeinated\Menus;
 
 use BadMethodCallException;
 use Collective\Html\HtmlBuilder;

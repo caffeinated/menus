@@ -1,9 +1,9 @@
 <?php
-namespace Caffeinated\Menu;
+namespace Caffeinated\Menus;
 
 use Illuminate\Support\ServiceProvider;
 
-class MenuServiceProvider extends ServiceProvider {
+class MenusServiceProvider extends ServiceProvider {
 
 	/**
 	 * Indicates if loading of the provider is deferred.

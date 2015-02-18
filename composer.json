@@ -1,5 +1,5 @@
 {
-    "name": "caffeinated/menu",
+    "name": "caffeinated/menus",
     "description": "Laravel 5 Menus",
     "keywords": ["menu", "navigation", "laravel", "caffeinated"],
     "license": "MIT",
@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Caffeinated\\Menu\\": "src/Caffeinated/Menu/"
+            "Caffeinated\\Menus\\": "src/Caffeinated/Menus/"
         }
     },
     "extra": {

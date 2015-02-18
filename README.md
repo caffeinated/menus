@@ -1,13 +1,13 @@
-Caffeinated Menu
-================
-Caffeinated Menu is originally based off of Lavary's [Laravel Menu](https://github.com/lavary/laravel-menu) package; rebuilt from the ground up (not necessarily a fork). This has a primary focus on Laravel 5 support with PSR coding standards. If you're looking for a menu builder solution for Laravel 4, please go check out [Laravel Menu](https://github.com/lavary/laravel-menu)!
+Caffeinated Menus
+=================
+Caffeinated Menus is originally based off of Lavary's [Laravel Menu](https://github.com/lavary/laravel-menu) package; rebuilt from the ground up (not necessarily a fork). This has a primary focus on Laravel 5 support with PSR coding standards. If you're looking for a menu builder solution for Laravel 4, please go check out [Laravel Menu](https://github.com/lavary/laravel-menu)!
 
 Quick Installation
 ------------------
-Begin by installing the package through Composer. Add `caffeinated/menu` to your composer.json file:
+Begin by installing the package through Composer. Add `caffeinated/menus` to your composer.json file:
 
 ```
-"caffeinated/menu": "~1.0@dev"
+"caffeinated/menus": "~1.0@dev"
 ```
 
 Then run `composer install` to pull the package in.
@@ -16,12 +16,12 @@ Once this operation is complete, simply add the service provider class and facad
 
 #### Service Provider
 ```php
-'Caffeinated\Menu\MenuServiceProvider',
+'Caffeinated\Menus\MenusServiceProvider',
 ```
 
 #### Facade
 ```
-'Menu' => 'Caffeinated\Menu\Facades\Menu',
+'Menu' => 'Caffeinated\Menus\Facades\Menu',
 ```
 
 Usage
@@ -49,7 +49,6 @@ More documentation coming soon
 ------------------------------
 
 ### Example Bootstrap menu template
-
 
 #### Twig
 

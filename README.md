@@ -94,3 +94,54 @@ More documentation coming soon
 	</li>
 {% endfor %}
 ```
+
+#### Blade
+
+**navbar.blade.php**
+```php
+<nav class="navbar navbar-inverse" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+
+			<a href="#" class="navbar-brand">Caffeinated Menu</a>
+		</div>
+
+		<div class="collapse navbar-collapse" id="menu-collapse">
+			<ul class="nav navbar-nav">
+				@include('partials.menu.items', ['items'=> $menu_public->roots()])
+			</ul>
+		</div>
+	</div>
+</nav>
+```
+
+**items.blade.php**
+```php
+@foreach($items as $item)
+	<li @if($item->hasChildren())class ="dropdown"@endif>
+		@if($item->link) <a @if($item->hasChildren()) class="dropdown-toggle" data-toggle="dropdown" @endif href="{{ $item->url() }}">
+			{{ $item->title }}
+			@if($item->hasChildren()) <b class="caret"></b> @endif
+		</a>
+		@else
+			{{$item->title}}
+		@endif
+		@if($item->hasChildren())
+			<ul class="dropdown-menu">
+				@foreach($item->children() as $child)
+					<li><a href="{{ $child->url() }}">{{ $child.title }}</a></li>
+				@endforeach
+			</ul>
+		@endif
+	</li>
+	@if($item->divider)
+		<li{{\HTML::attributes($item->divider)}}></li>
+	@endif
+@endforeach
+```

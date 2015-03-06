@@ -4,7 +4,7 @@ namespace Caffeinated\Menus;
 class Item
 {
 	/**
-	 * @var \Caffeinated\Menu\Builder
+	 * @var \Caffeinated\Menus\Builder
 	 */
 	protected $builder;
 
@@ -46,7 +46,7 @@ class Item
 	/**
 	 * Constructor.
 	 *
-	 * @param  \Caffeinated\Menu\Builder  $builder
+	 * @param  \Caffeinated\Menus\Builder  $builder
 	 * @param  int                        $id
 	 * @param  string                     $title
 	 * @param  array|string               $options
@@ -95,7 +95,7 @@ class Item
 	 *
 	 * @param  string        $title
 	 * @param  array|string  $options
-	 * @return void
+	 * @return \Caffeinated\Menus\Item
 	 */
 	public function add($title, $options = '')
 	{
@@ -114,7 +114,7 @@ class Item
 	 * Add attributes to the menu item.
 	 *
 	 * @param  mixed
-	 * @return \Caffeinated\Menu\Item|string
+	 * @return \Caffeinated\Menus\Item|string
 	 */
 	public function attributes()
 	{
@@ -155,7 +155,7 @@ class Item
 	 * Appends HTML to the item.
 	 *
 	 * @param  string $html
-	 * @return Caffeinated\Menus\Item
+	 * @return \Caffeinated\Menus\Item
 	 */
 	public function prepend($html)
 	{
@@ -169,7 +169,7 @@ class Item
 	 *
 	 * @param  string  $icon
 	 * @param  string  $type  Can be either "fontawesome" or "glyphicon"
-	 * @return Caffeinated\Menus\Item
+	 * @return \Caffeinated\Menus\Item
 	 */
 	public function icon($icon, $type = 'fontawesome')
 	{
@@ -203,7 +203,7 @@ class Item
 	/**
 	 * Returns all children underneath the menu item.
 	 *
-	 * @return \Caffeinated\Menu\Collection
+	 * @return \Caffeinated\Menus\Collection
 	 */
 	public function children()
 	{
@@ -214,7 +214,7 @@ class Item
 	 * Set or get an item's metadata.
 	 *
 	 * @param  mixed
-	 * @return string|Caffeinated\Menu\Item
+	 * @return string|\Caffeinated\Menus\Item
 	 */
 	public function data()
 	{

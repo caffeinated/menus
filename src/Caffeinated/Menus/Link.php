@@ -32,7 +32,7 @@ class Link
 	 * Set the link's href property.
 	 *
 	 * @param  string  $href
-	 * @return \Caffeinated\Menu\Link
+	 * @return \Caffeinated\Menus\Link
 	 */
 	public function href($href)
 	{
@@ -45,7 +45,7 @@ class Link
 	 * Add attributes to the link.
 	 *
 	 * @param  mixed
-	 * @return \Caffeinated\Menu\Link|string
+	 * @return \Caffeinated\Menus\Link|string
 	 */
 	public function attr()
 	{

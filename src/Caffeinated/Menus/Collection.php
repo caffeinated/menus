@@ -9,7 +9,7 @@ class Collection extends BaseCollection
 	 * Add attributes to the collection of menu items.
 	 *
 	 * @param  mixed
-	 * @return \Caffeinated\Menu\Collection
+	 * @return \Caffeinated\Menus\Collection
 	 */
 	public function attr()
 	{
@@ -30,7 +30,7 @@ class Collection extends BaseCollection
 	 * Add metadata to the collection of items.
 	 *
 	 * @param  mixed
-	 * @return \Caffeinated\Menu\Collection
+	 * @return \Caffeinated\Menus\Collection
 	 */
 	public function data()
 	{
@@ -51,7 +51,7 @@ class Collection extends BaseCollection
 	 * Appends text or HTML to the collection of items.
 	 *
 	 * @param  string  $html
-	 * @return \Caffeinated\Menu\Collection
+	 * @return \Caffeinated\Menus\Collection
 	 */
 	public function append($html)
 	{
@@ -66,7 +66,7 @@ class Collection extends BaseCollection
 	 * Prepends text or HTML to the collection of items.
 	 *
 	 * @param  string  $html
-	 * @return \Caffeinated\Menu\Collection
+	 * @return \Caffeinated\Menus\Collection
 	 */
 	public function prepend($html)
 	{

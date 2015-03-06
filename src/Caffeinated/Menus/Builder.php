@@ -68,8 +68,8 @@ class Builder
 	 * Add an item to the defined menu.
 	 *
 	 * @param  string  $title
-	 * @param  array   $options
-	 * @return \Caffeinated\Menu\Item
+	 * @param  array|string   $options
+	 * @return \Caffeinated\Menus\Item
 	 */
 	public function add($title, $options = '')
 	{
@@ -162,7 +162,7 @@ class Builder
 	 *
 	 * @param  string|callable  $sortBy
 	 * @param  string           $sortType
-	 * @return Caffeinated\Menus\Builder
+	 * @return \Caffeinated\Menus\Builder
 	 */
 	public function sortBy($sortBy, $sortType = 'asc')
 	{
@@ -320,7 +320,7 @@ class Builder
 	 *
 	 * @param  string  $method
 	 * @param  array   $args
-	 * @return \Caffeinated\Menu\Item|bool
+	 * @return \Caffeinated\Menus\Item|bool
 	 */
 	public function __call($method, $args)
 	{
@@ -356,7 +356,7 @@ class Builder
 	 * Returns menu item by name.
 	 *
 	 * @param  string  $property
-	 * @return \Caffeinated\Menu\Item
+	 * @return \Caffeinated\Menus\Item
 	 */
 	public function __get($property)
 	{

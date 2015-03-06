@@ -9,7 +9,7 @@ use Illuminate\View\Factory;
 class Menu
 {
 	/**
-	 * @var \Caffeinated\Menu\Collection
+	 * @var \Caffeinated\Menus\Collection
 	 */
 	protected $collection;
 
@@ -55,7 +55,7 @@ class Menu
 	 *
 	 * @param  string    $name
 	 * @param  callable  $callback
-	 * @return \Caffeinated\Menu\Builder
+	 * @return \Caffeinated\Menus\Builder
 	 */
 	public function make($name, $callback)
 	{
@@ -94,7 +94,7 @@ class Menu
 	 * Find and return the given menu collection.
 	 *
 	 * @param  string  $key
-	 * @return \Caffeinated\Menu\Collection
+	 * @return \Caffeinated\Menus\Collection
 	 */
 	public function get($key)
 	{
@@ -104,7 +104,7 @@ class Menu
 	/**
 	 * Returns all menu instances.
 	 *
-	 * @return \Caffeinated\Menu\Collection
+	 * @return \Caffeinated\Menus\Collection
 	 */
 	public function all()
 	{

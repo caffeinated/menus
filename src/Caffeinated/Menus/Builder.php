@@ -212,9 +212,9 @@ class Builder
 		if (isset($options['url'])) {
 			return $this->getUrl($options);
 		} elseif (isset($options['route'])) {
-			return $this->getRoute($options['route']);
+			return $this->url->route($options['route']);
 		} elseif (isset($options['action'])) {
-			return $this->getcontrollerAction($options['action']);
+			return $this->url->action($options['action']);
 		}
 
 		return null;

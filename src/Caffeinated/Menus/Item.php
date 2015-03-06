@@ -152,6 +152,45 @@ class Item
 	}
 
 	/**
+	 * Appends HTML to the item.
+	 *
+	 * @param  string $html
+	 * @return Caffeinated\Menus\Item
+	 */
+	public function prepend($html)
+	{
+		$this->title = $html.' '.$this->title;
+
+		return $this;
+	}
+
+	/**
+	 * Appends the specified icon to the item.
+	 *
+	 * @param  string  $icon
+	 * @param  string  $type  Can be either "fontawesome" or "glyphicon"
+	 * @return Caffeinated\Menus\Item
+	 */
+	public function icon($icon, $type = 'fontawesome')
+	{
+		switch ($type) {
+			case 'fontawesome':
+				$html = '<i class="fa fa-'.$icon.' fa-fw"></i>&nbsp;';
+				break;
+
+			case 'glyphicon':
+				$html = '<span class="glyphicon glyphicon-'.$icon.'" aria-hidden="true"></span>';
+				break;
+
+			default:
+				$html = '';
+				break;
+		}
+
+		return $this->prepend($html);
+	}
+
+	/**
 	 * Determines if the menu item has children.
 	 *
 	 * @return bool
@@ -172,6 +211,31 @@ class Item
 	}
 
 	/**
+	 * Set or get an item's metadata.
+	 *
+	 * @param  mixed
+	 * @return string|Caffeinated\Menu\Item
+	 */
+	public function data()
+	{
+		$args = func_get_args();
+
+		if (isset($args[0]) and is_array($args[0])) {
+			$this->data = array_merge($this->data, array_change_key_case($args[0]));
+
+			return $this;
+		} elseif (isset($args[0]) and isset($args[1])) {
+			$this->data[strtolower($args[0])] = $args[1];
+
+			return $this;
+		} elseif (isset($args[0])) {
+			return isset($this->data[$args[0]]) ? $this->data[$args[0]] : null;
+		}
+
+		return $this->data;
+	}
+
+	/**
 	 * Return either a property or attribute item value.
 	 *
 	 * @param  string  $property
@@ -179,7 +243,7 @@ class Item
 	 */
 	public function __get($property)
 	{
-		if (property_exists($property)) {
+		if (property_exists($this, $property)) {
 			return $this->$property;
 		}
 

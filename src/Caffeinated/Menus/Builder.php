@@ -157,6 +157,43 @@ class Builder
 		return null;
 	}
 
+	/**
+	 * Sorts the menu based on user's callable.
+	 *
+	 * @param  string|callable  $sortBy
+	 * @param  string           $sortType
+	 * @return Caffeinated\Menus\Builder
+	 */
+	public function sortBy($sortBy, $sortType = 'asc')
+	{
+		if (is_callable($sortBy)) {
+			$result = call_user_func($sortBy, $this->items->toArray());
+
+			if (! is_array($result)) {
+				$result = array($result);
+			}
+
+			$this->items = new Collection($result);
+		}
+
+		$this->items->sort(function ($itemA, $itemB) use ($sortBy, $sortType) {
+			$itemA = $itemA->$sortBy;
+			$itemB = $itemB->$sortBy;
+
+			if ($itemA == $itemB) {
+				return 0;
+			}
+
+			if ($sortType == 'asc') {
+				return $itemA > $itemB ? 1 : -1;
+			}
+
+			return $itemA < $itemB ? 1 : -1;
+		});
+
+		return $this;
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Dispatch Methods
@@ -252,7 +289,7 @@ class Builder
 	{
 		$items   = '';
 		$itemTag = in_array($type, ['ul', 'ol']) ? 'li' : $type;
-	
+
 		foreach ($this->whereParent($parent) as $item) {
 			$items .= "<{$itemTag}{$this->attributes($item->attributes())}>";
 
@@ -267,14 +304,14 @@ class Builder
 				$items .= $this->render($type, $item->id);
 				$items .= "</{$type}>";
 			}
-	
+
 			$items .= "</{$itemTag}>";
 
 			if ($item->divider) {
 				$items .= "<{$item_tag}{$this->attributes($item->divider)}></{$item_tag}>";
 			}
 		}
-	
+
 		return $items;
 	}
 

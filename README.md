@@ -35,3 +35,5 @@ Once this operation is complete, simply add the service provider class and facad
 ```
 'Menu' => 'Caffeinated\Menus\Facades\Menu',
 ```
+
+And that's it! With your coffee in reach, start building out some awesome menus!

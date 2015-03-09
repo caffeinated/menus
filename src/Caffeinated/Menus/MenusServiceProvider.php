@@ -13,7 +13,17 @@ class MenusServiceProvider extends ServiceProvider {
 	protected $defer = true;
 
 	/**
-	 * Register the service provider.
+	 * Perform post-registration booting of services.
+	 *
+	 * @return void
+	 */
+	public function boot()
+	{
+		$this->app->register('Collective\Html\HtmlServiceProvider');
+	}
+
+	/**
+	 * Register bindings in the container.
 	 *
 	 * @return void
 	 */
@@ -25,7 +35,7 @@ class MenusServiceProvider extends ServiceProvider {
 	/**
 	 * Get the services provided by the provider.
 	 *
-	 * @return string[]
+	 * @return array
 	 */
 	public function provides()
 	{

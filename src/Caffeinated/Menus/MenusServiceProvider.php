@@ -13,16 +13,6 @@ class MenusServiceProvider extends ServiceProvider {
 	protected $defer = true;
 
 	/**
-	 * Perform post-registration booting of services.
-	 *
-	 * @return void
-	 */
-	public function boot()
-	{
-		$this->app->register('Collective\Html\HtmlServiceProvider');
-	}
-
-	/**
 	 * Register bindings in the container.
 	 *
 	 * @return void
@@ -49,6 +39,10 @@ class MenusServiceProvider extends ServiceProvider {
 	 */
 	protected function registerServices()
 	{
+		// Register the Laravel Collective HTML Service Provider
+		$this->app->register('Collective\Html\HtmlServiceProvider');
+
+		// Bind our Menu class to the IoC container
 		$this->app->bindShared('menu', function($app) {
 			return new Menu($app['config'], $app['view'], $app['html'], $app['url']);
 		});

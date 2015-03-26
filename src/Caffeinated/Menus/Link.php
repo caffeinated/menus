@@ -42,6 +42,18 @@ class Link
 	}
 
 	/**
+	 * Make the link active.
+	 *
+	 * @return \Caffeinated\Menus\Link
+	 */
+	public function active()
+	{
+		$this->attributes['class'] = Builder::formatGroupClass(['class' => 'active'], $this->attributes);
+
+		return $this;
+	}
+
+	/**
 	 * Add attributes to the link.
 	 *
 	 * @param  mixed

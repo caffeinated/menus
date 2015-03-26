@@ -143,6 +143,11 @@ class Builder
 		return $this->whereParent();
 	}
 
+	public function test()
+	{
+		return 'asdf';
+	}
+
 	/**
 	 * Get the prefix from the last group of the stack.
 	 *
@@ -155,6 +160,20 @@ class Builder
 		}
 
 		return null;
+	}
+
+	/**
+	 * Format the groups class.
+	 */
+	public static function formatGroupClass($new, $old)
+	{
+		if (isset($new['class'])) {
+			$classes = trim(trim(array_get($old, 'class')).' '.trim(array_get($new, 'class')));
+
+			return implode(' ', array_unique(explode(' ', $classes)));
+		}
+
+		return array_get($old, 'class');
 	}
 
 	/**

@@ -1,6 +1,8 @@
 <?php
 namespace Caffeinated\Menus;
 
+use Request;
+
 class Item
 {
 	/**
@@ -63,6 +65,11 @@ class Item
 		$this->configureLink($options);
 	}
 
+	public function builder()
+	{
+		return $this->builder;
+	}
+
 	/**
 	 * Configures the link for the menu item.
 	 *
@@ -85,9 +92,7 @@ class Item
 
 		$this->link = isset($path) ? new Link($path) : null;
 
-		if ($this->builder->config('auto_active') === true) {
-			$this->checkActiveStatus();
-		}
+		$this->checkActiveStatus();
 	}
 
 	/**
@@ -233,6 +238,55 @@ class Item
 		}
 
 		return $this->data;
+	}
+
+	/**
+	 * Decide if the item should be active.
+	 *
+	 * @return null
+	 */
+	public function checkActiveStatus()
+	{
+		$path        = ltrim(parse_url($this->url(), PHP_URL_PATH), '/');
+		$requestPath = Request::path();
+
+		if ($this->builder->config['rest_base']) {
+			$base = (is_array($this->builder->config['rest_base'])) ? implode('|', $this->builder->config['rest_base']) : $this->builder->conf['rest_base'];
+
+			list($path, $requestPath) = preg_replace('@^('.$base.')/@', '', [$path, $requestPath], 1);
+		}
+
+		if ($this->url() == Request::url()) {
+			$this->activate();
+		}
+	}
+
+	public function activate(Item $item = null)
+	{
+		$item = (is_null($item)) ? $this : $item;
+
+		$item->active();
+
+		if ($item->parent) {
+			$this->activate($this->builder->whereId($item->parent)->first());
+		}
+	}
+
+	public function active($pattern = null)
+	{
+		if (! is_null($pattern)) {
+			$pattern = ltrim(preg_replace('/\/\*/', '(/.*)?', $pattern), '/');
+
+			if (preg_match("@^{$pattern}\z@", Request::path())) {
+				$this->activate();
+			}
+
+			return $this;
+		}
+
+		$this->attributes['class'] = Builder::formatGroupClass(['class' => 'active'], $this->attributes);
+
+		return $this;
 	}
 
 	/**

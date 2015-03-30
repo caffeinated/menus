@@ -1,7 +1,7 @@
 <?php
 namespace Caffeinated\Menus;
 
-use Request;
+use Illuminate\Support\Facades\Request;
 
 class Item
 {

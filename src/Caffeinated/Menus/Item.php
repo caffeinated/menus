@@ -157,7 +157,7 @@ class Item
 	}
 
 	/**
-	 * Appends HTML to the item.
+	 * Prepends HTML to the item.
 	 *
 	 * @param  string $html
 	 * @return \Caffeinated\Menus\Item
@@ -165,6 +165,19 @@ class Item
 	public function prepend($html)
 	{
 		$this->title = $html.' '.$this->title;
+
+		return $this;
+	}
+
+	/**
+	 * Appends HTML to the item.
+	 *
+	 * @param  string $html
+	 * @return \Caffeinated\Menus\Item
+	 */
+	public function append($html)
+	{
+		$this->title = $this->title.' '.$html;
 
 		return $this;
 	}

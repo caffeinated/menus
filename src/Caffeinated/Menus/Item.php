@@ -205,7 +205,27 @@ class Item
 				break;
 		}
 
-		return $this->prepend($html);
+		return $this->data('icon', $html);
+	}
+
+	/**
+	 * Return the title with the icon prepended automatically.
+	 *
+	 * @return string
+	 */
+	public function prependIcon()
+	{
+		return $this->prepend($this->data('icon'));
+	}
+
+	/**
+	 * Return the title with the icon appended automatically.
+	 *
+	 * @return string
+	 */
+	public function appendIcon()
+	{
+		return $this->append($this->data('icon'));
 	}
 
 	/**

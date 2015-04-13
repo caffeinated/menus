@@ -1,7 +1,7 @@
 <?php
 namespace Caffeinated\Menus;
 
-use Collective\Html\HtmlBuilder;
+use Illuminate\Html\HtmlBuilder;
 use Illuminate\Config\Repository;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\View\Factory;
@@ -19,7 +19,7 @@ class Menu
 	protected $config;
 
 	/**
-	 * @var \Collective\Html\HtmlBuilder
+	 * @var \Illuminate\Html\HtmlBuilder
 	 */
 	protected $html;
 
@@ -38,7 +38,7 @@ class Menu
 	 *
 	 * @param  \Illuminate\Config\Repository     $config
 	 * @param  \Illuminate\View\Factory          $view
-	 * @param  \Collective\Html\HtmlBuilder      $html
+	 * @param  \Illuminate\Html\HtmlBuilder      $html
 	 * @param  \Illuminate\Routing\UrlGenerator  $url
 	 */
 	public function __construct(Repository $config, Factory $view, HtmlBuilder $html, UrlGenerator $url)

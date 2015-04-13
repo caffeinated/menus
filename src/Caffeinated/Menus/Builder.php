@@ -2,7 +2,7 @@
 namespace Caffeinated\Menus;
 
 use BadMethodCallException;
-use Collective\Html\HtmlBuilder;
+use Illuminate\Html\HtmlBuilder;
 use Illuminate\Routing\UrlGenerator;
 
 class Builder
@@ -13,7 +13,7 @@ class Builder
 	protected $items;
 
 	/**
-	 * @var \Collective\Html\HtmlBuilder
+	 * @var \Illuminate\Html\HtmlBuilder
 	 */
 	protected $html;
 
@@ -52,7 +52,7 @@ class Builder
 	 *
 	 * @param string                            $name
 	 * @param array                             $config
-	 * @param \Collective\Html\HtmlBuilder      $html
+	 * @param \Illuminate\Html\HtmlBuilder      $html
 	 * @param \Illuminate\Routing\UrlGenerator  $url
 	 */
 	public function __construct($name, $config, HtmlBuilder $html, UrlGenerator $url)

@@ -116,28 +116,45 @@ class Item
 	}
 
 	/**
-	 * Add attributes to the menu item.
+	 * Fetch the formatted attributes for the item in HTML.
 	 *
-	 * @param  mixed
-	 * @return \Caffeinated\Menus\Item|string
+	 * @return string
 	 */
 	public function attributes()
 	{
-		$args = func_get_args();
+		return $this->builder->attributes($this->attributes);
+	}
 
-		if (isset($args[0]) and is_array($args[0])) {
-			$this->attributes = array_merge($this->attributes, $args[0]);
+	/**
+	 * Get all attributes.
+	 *
+	 * @return array
+	 */
+	public function getAttributes()
+	{
+		return $this->attributes;
+	}
+
+	/**
+	 * Assign or fetch the desired attribute.
+	 *
+	 * @param  array|string  $attribute
+	 * @param  string        $value
+	 * @return mixed
+	 */
+	public function attribute($attribute, $value)
+	{
+		if (isset($attribute) and is_array($attribute)) {
+			$this->attributes = array_merge($this->attributes, $attribute);
 
 			return $this;
-		} elseif (isset($args[0]) and isset($args[1])) {
-			$this->attributes[$args[0]] = $args[1];
+		} elseif (isset($attribute) and isset($value)) {
+			$this->attributes[$attribute] = $value;
 
 			return $this;
-		} elseif (isset($args[0])) {
-			return isset($this->attributes[$args[0]]) ? $this->attributes[$args[0]] : null;
 		}
 
-		return $this->attributes;
+		return isset($this->attributes[$attribute]) ? $this->attributes[$attribute] : null;
 	}
 
 	/**

@@ -310,7 +310,7 @@ class Builder
 		$itemTag = in_array($type, ['ul', 'ol']) ? 'li' : $type;
 
 		foreach ($this->whereParent($parent) as $item) {
-			$items .= "<{$itemTag}{$this->attributes($item->attributes())}>";
+			$items .= "<{$itemTag}{$item->attributes()}>";
 
 			if ($item->link) {
 				$items .= "<a{$this->attributes($item->link->attr())} href=\"{$item->url()}\">{$item->title}</a>";

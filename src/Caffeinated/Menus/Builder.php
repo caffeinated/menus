@@ -123,6 +123,19 @@ class Builder
 	}
 
 	/**
+	 * Insert a divider after the item.
+	 *
+	 * @param  array  $attributes
+	 * @return void
+	 */
+	public function divide($attributes = array())
+	{
+		$attributes['class'] = self::formatGroupClass(['class' => 'divider'], $attributes);
+
+		$this->items->last()->divider = $attributes;
+	}
+
+	/**
 	 * Return the configuration value by key.
 	 *
 	 * @param  string  $key
@@ -352,7 +365,7 @@ class Builder
 			$items .= "</{$itemTag}>";
 
 			if ($item->divider) {
-				$items .= "<{$item_tag}{$this->attributes($item->divider)}></{$item_tag}>";
+				$items .= "<{$itemTag}{$this->attributes($item->divider)}></{$itemTag}>";
 			}
 		}
 

@@ -246,6 +246,21 @@ class Item
 	}
 
 	/**
+	 * Insert a divider after the item.
+	 *
+	 * @param  array  $attributes
+	 * @return void
+	 */
+	public function divide($attributes = array())
+	{
+		$attributes['class'] = $this->builder->formatGroupClass($attributes, ['class' => 'divider']);
+
+		$this->divider = $attributes;
+
+		return $this;
+	}
+
+	/**
 	 * Determines if the menu item has children.
 	 *
 	 * @return bool
@@ -334,7 +349,7 @@ class Item
 			return $this;
 		}
 
-		$this->attributes['class'] = Builder::formatGroupClass(['class' => 'active'], $this->attributes);
+		$this->attributes['class'] = $this->builder->formatGroupClass(['class' => 'active'], $this->attributes);
 
 		return $this;
 	}

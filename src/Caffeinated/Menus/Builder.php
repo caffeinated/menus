@@ -228,7 +228,7 @@ class Builder
 		} elseif (isset($options['route'])) {
 			return $this->getRoute($options['route']);
 		} elseif (isset($options['action'])) {
-			return $this->url->action($options['action']);
+			return $this->getAction($options['action']);
 		}
 
 		return null;
@@ -276,6 +276,21 @@ class Builder
 		}
 
 		return $this->url->route($route);
+	}
+
+	/**
+	 * Get the controller action for a "action" option.
+	 *
+	 * @param  array|string  $action
+	 * @return string
+	 */
+	protected function getAction($action)
+	{
+		if (is_array($action)) {
+			return $this->url->action($action[0], array_slice($action, 1));
+		}
+
+		return $this->url->action($action);
 	}
 
 	/**

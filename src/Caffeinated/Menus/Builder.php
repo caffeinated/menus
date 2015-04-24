@@ -226,7 +226,7 @@ class Builder
 		if (isset($options['url'])) {
 			return $this->getUrl($options);
 		} elseif (isset($options['route'])) {
-			return $this->url->route($options['route']);
+			return $this->getRoute($options['route']);
 		} elseif (isset($options['action'])) {
 			return $this->url->action($options['action']);
 		}
@@ -261,6 +261,21 @@ class Builder
 		}
 
 		return $this->url->to($prefix.'/'.$url, array(), $secure);
+	}
+
+	/**
+	 * Get the route action for a "route" option.
+	 *
+	 * @param  array|string  $route
+	 * @return string
+	 */
+	protected function getRoute($route)
+	{
+		if (is_array($route)) {
+			return $this->url->route($route[0], array_slice($route, 1));
+		}
+
+		return $this->url->route($route);
 	}
 
 	/**

@@ -184,43 +184,6 @@ class Builder
 		return array_get($old, 'class');
 	}
 
-	/**
-	 * Sorts the menu based on user's callable.
-	 *
-	 * @param  string|callable  $sortBy
-	 * @param  string           $sortType
-	 * @return \Caffeinated\Menus\Builder
-	 */
-	public function sortBy($sortBy, $sortType = 'asc')
-	{
-		if (is_callable($sortBy)) {
-			$result = call_user_func($sortBy, $this->items->toArray());
-
-			if (! is_array($result)) {
-				$result = array($result);
-			}
-
-			$this->items = new Collection($result);
-		}
-
-		$this->items->sort(function ($itemA, $itemB) use ($sortBy, $sortType) {
-			$itemA = $itemA->$sortBy;
-			$itemB = $itemB->$sortBy;
-
-			if ($itemA == $itemB) {
-				return 0;
-			}
-
-			if ($sortType == 'asc') {
-				return $itemA > $itemB ? 1 : -1;
-			}
-
-			return $itemA < $itemB ? 1 : -1;
-		});
-
-		return $this;
-	}
-
 	/*
 	|--------------------------------------------------------------------------
 	| Dispatch Methods
@@ -319,6 +282,97 @@ class Builder
 
 	/*
 	|--------------------------------------------------------------------------
+	| Filter Methods
+	|--------------------------------------------------------------------------
+	|
+	*/
+
+	/**
+	 * Filter menu items through a callback.
+	 *
+	 * Since menu items are stored as a collection, this will
+	 * simply forward the callback to the Laravel Collection
+	 * filter() method and return the results.
+	 *
+	 * @param  callable  $callback
+	 * @return Builder
+	 */
+	public function filter($callback)
+	{
+		if (is_callable($callback)) {
+			$this->items = $this->items->filter($callback);
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Filter menu items recursively.
+	 *
+	 * @param  string  $attribute
+	 * @param  mixed   $value
+	 * @return Collection
+	 */
+	public function filterRecursively($attribute, $value)
+	{
+		$collection = new Collection;
+
+		$this->items->each(function($item) use ($attribute, $value, &$collection) {
+			if (! property_exists($item, $attribute)) {
+				return $false;
+			}
+
+			if ($item->$attribute == $value) {
+				$collection->push($item);
+
+				if ($item->hasChildren()) {
+					$collection = $collection->merge($this->filterRecursively($attribute, $item->id));
+				}
+			}
+		});
+
+		return $collection;
+	}
+
+	/**
+	 * Sorts the menu based on user's callable.
+	 *
+	 * @param  string|callable  $sortBy
+	 * @param  string           $sortType
+	 * @return \Caffeinated\Menus\Builder
+	 */
+	public function sortBy($sortBy, $sortType = 'asc')
+	{
+		if (is_callable($sortBy)) {
+			$result = call_user_func($sortBy, $this->items->toArray());
+
+			if (! is_array($result)) {
+				$result = array($result);
+			}
+
+			$this->items = new Collection($result);
+		}
+
+		$this->items->sort(function ($itemA, $itemB) use ($sortBy, $sortType) {
+			$itemA = $itemA->$sortBy;
+			$itemB = $itemB->$sortBy;
+
+			if ($itemA == $itemB) {
+				return 0;
+			}
+
+			if ($sortType == 'asc') {
+				return $itemA > $itemB ? 1 : -1;
+			}
+
+			return $itemA < $itemB ? 1 : -1;
+		});
+
+		return $this;
+	}
+
+	/*
+	|--------------------------------------------------------------------------
 	| Rendering Methods
 	|--------------------------------------------------------------------------
 	|
@@ -393,7 +447,7 @@ class Builder
 		$recursive = isset($args[1]) ? $args[1] : false;
 
 		if ($recursive) {
-			return $this->filterRecursive($attribute, $value);
+			return $this->filterRecursively($attribute, $value);
 		}
 
 		return $this->items->filter(function($item) use ($attribute, $value) {

@@ -186,6 +186,45 @@ class Builder
 
 	/*
 	|--------------------------------------------------------------------------
+	| Fetching Methods
+	|--------------------------------------------------------------------------
+	|
+	*/
+
+	/**
+	 * Fetches and returns all menu itemss.
+	 *
+	 * @return Collection
+	 */
+	public function all()
+	{
+		return $this->items;
+	}
+
+	/**
+	 * Fetches and returns a menu item by it's slug.
+	 *
+	 * @param  string  $slug
+	 * @return Item
+	 */
+	public function get($slug)
+	{
+		return $this->whereSlug($slug)->first();
+	}
+
+	/**
+	 * Fetches and returns a menu item by it's ID.
+	 *
+	 * @param  integer  $id
+	 * @return Item
+	 */
+	public function find($id)
+	{
+		return $this->whereId($id)->first();
+	}
+
+	/*
+	|--------------------------------------------------------------------------
 	| Dispatch Methods
 	|--------------------------------------------------------------------------
 	|

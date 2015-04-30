@@ -147,16 +147,6 @@ class Builder
 	}
 
 	/**
-	 * Returns all items with no parents.
-	 *
-	 * @return \Illuminate\Support\Collection
-	 */
-	public function roots()
-	{
-		return $this->whereParent();
-	}
-
-	/**
 	 * Get the prefix from the last group of the stack.
 	 *
 	 * @return string
@@ -202,6 +192,16 @@ class Builder
 	}
 
 	/**
+	 * Returns all items with no parents.
+	 *
+	 * @return \Illuminate\Support\Collection
+	 */
+	public function roots()
+	{
+		return $this->whereParent();
+	}
+
+	/**
 	 * Fetches and returns a menu item by it's slug.
 	 *
 	 * @param  string  $slug
@@ -221,6 +221,26 @@ class Builder
 	public function find($id)
 	{
 		return $this->whereId($id)->first();
+	}
+
+	/**
+	 * Fetches and returns the first menu item.
+	 *
+	 * @return Item
+	 */
+	public function first()
+	{
+		return $this->items->first();
+	}
+
+	/**
+	 * Fetches and returns the last menu item.
+	 *
+	 * @return Item
+	 */
+	public function last()
+	{
+		return $this->items->last();
 	}
 
 	/*
@@ -264,14 +284,14 @@ class Builder
 		$secure = (isset($options['secure']) and $options['secure'] === true) ? true : false;
 
 		if (is_array($url)) {
-			if (self::isAbs($url[0])) {
+			if (self::isAbsolute($url[0])) {
 				return $url[0];
 			}
 
 			return $this->url->to($prefix.'/'.$url[0], array_slice($url, 1), $secure);
 		}
 
-		if (self::isAbs($url)) {
+		if (self::isAbsolute($url)) {
 			return $url;
 		}
 
@@ -314,7 +334,7 @@ class Builder
 	 * @param  string  $url
 	 * @return bool
 	 */
-	public static function isAbs($url)
+	public static function isAbsolute($url)
 	{
 		return parse_url($url, PHP_URL_SCHEME) or false;
 	}

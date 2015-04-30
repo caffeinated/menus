@@ -19,7 +19,7 @@ Quick Installation
 Begin by installing the package through Composer. Add `caffeinated/menus` to your composer.json file:
 
 ```
-"caffeinated/menus": "~1.0@dev"
+"caffeinated/menus": "~1.0"
 ```
 
 Then run `composer update` to pull the package in.

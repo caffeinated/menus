@@ -213,6 +213,17 @@ class Builder
 	}
 
 	/**
+	 * Facade method for the get() method.
+	 *
+	 * @param  string  $slug
+	 * @return Item
+	 */
+	public function item($slug)
+	{
+		return $this->get($slug);
+	}
+
+	/**
 	 * Fetches and returns a menu item by it's ID.
 	 *
 	 * @param  integer  $id

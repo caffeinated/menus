@@ -210,7 +210,7 @@ class Item
 	{
 		switch ($type) {
 			case 'fontawesome':
-				$html = '<i class="fa fa-'.$icon.' fa-fw"></i>&nbsp;';
+				$html = '<i class="fa fa-'.$icon.' fa-fw"></i>';
 				break;
 
 			case 'glyphicon':

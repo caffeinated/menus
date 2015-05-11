@@ -142,7 +142,7 @@ class Item
 	 * @param  string        $value
 	 * @return mixed
 	 */
-	public function attribute($attribute, $value)
+	public function attribute($attribute, $value = null)
 	{
 		if (isset($attribute) and is_array($attribute)) {
 			$this->attributes = array_merge($this->attributes, $attribute);
@@ -331,6 +331,8 @@ class Item
 		$item = (is_null($item)) ? $this : $item;
 
 		$item->active();
+
+		$item->data('active', true);
 
 		if ($item->parent) {
 			$this->activate($this->builder->whereId($item->parent)->first());

@@ -194,7 +194,7 @@ class Builder
 	/**
 	 * Returns all items with no parents.
 	 *
-	 * @return \Illuminate\Support\Collection
+	 * @return Collection
 	 */
 	public function roots()
 	{
@@ -252,6 +252,24 @@ class Builder
 	public function last()
 	{
 		return $this->items->last();
+	}
+
+	/**
+	 * Fetches and returns all active state menu items.
+	 *
+	 * @return Collection
+	 */
+	public function active()
+	{
+		$activeItems = array();
+
+		foreach ($this->items as $item) {
+			if ($item->data('active')) {
+				$activeItems[] = $item;
+			}
+		}
+
+		return $activeItems;
 	}
 
 	/*

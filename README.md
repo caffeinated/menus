@@ -38,7 +38,7 @@ Once this operation is complete, simply add the service provider class and facad
 ```
 
 ##### Facade
-```
+```php
 'Menu' => 'Caffeinated\Menus\Facades\Menu',
 ```
 
@@ -49,7 +49,7 @@ Caffeinated\Menus\MenusServiceProvider::class,
 ```
 
 ##### Facade
-```
+```php
 'Menu' => Caffeinated\Menus\Facades\Menu::class,
 ```
 

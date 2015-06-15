@@ -1,6 +1,7 @@
 Caffeinated Menus
 =================
-[![Laravel](https://img.shields.io/badge/Laravel-5.0-orange.svg?style=flat-square)](http://laravel.com)
+[![Laravel 5.0](https://img.shields.io/badge/Laravel-5.0-orange.svg?style=flat-square)](http://laravel.com)
+[![Laravel 5.1](https://img.shields.io/badge/Laravel-5.1-orange.svg?style=flat-square)](http://laravel.com)
 [![Source](http://img.shields.io/badge/source-caffeinated/menus-blue.svg?style=flat-square)](https://github.com/caffeinated/menus)
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
 
@@ -16,24 +17,40 @@ You will find user friendly and updated documentation in the wiki here: [Caffein
 
 Quick Installation
 ------------------
-Begin by installing the package through Composer. Add `caffeinated/menus` to your composer.json file:
+Begin by installing the package through Composer. Depending on what version of Laravel you are using (5.0 or 5.1), you'll want to pull in the `~1.0` or `~2.0` release, respectively:
 
+#### Laravel 5.0.x
 ```
-"caffeinated/menus": "~1.0"
+composer require caffeinated/menus=~1.0
 ```
 
-Then run `composer update` to pull the package in.
+#### Laravel 5.1.x
+```
+composer require caffeinated/menus=~2.0
+```
 
 Once this operation is complete, simply add the service provider class and facade alias to your project's `config/app.php` file:
 
-#### Service Provider
+#### Laravel 5.0.x
+##### Service Provider
 ```php
 'Caffeinated\Menus\MenusServiceProvider',
 ```
 
-#### Facade
+##### Facade
 ```
 'Menu' => 'Caffeinated\Menus\Facades\Menu',
+```
+
+#### Laravel 5.1.x
+##### Service Provider
+```php
+Caffeinated\Menus\MenusServiceProvider::class,
+```
+
+##### Facade
+```
+'Menu' => Caffeinated\Menus\Facades\Menu::class,
 ```
 
 And that's it! With your coffee in reach, start building out some awesome menus!

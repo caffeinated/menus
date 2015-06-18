@@ -15,7 +15,7 @@
         "illuminate/config": "5.1.*",
         "illuminate/routing": "5.1.*",
         "illuminate/view": "5.1.*",
-        "laravelcollective/html": "5.0.*"
+        "laravelcollective/html": "5.1.*"
     },
     "autoload": {
         "psr-4": {

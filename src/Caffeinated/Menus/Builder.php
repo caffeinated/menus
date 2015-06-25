@@ -182,7 +182,7 @@ class Builder
 	*/
 
 	/**
-	 * Fetches and returns all menu itemss.
+	 * Fetches and returns all menu items.
 	 *
 	 * @return Collection
 	 */
@@ -423,37 +423,30 @@ class Builder
 	}
 
 	/**
-	 * Sorts the menu based on user's callable.
+	 * Sorts the menu based on key given in ascending order.
 	 *
-	 * @param  string|callable  $sortBy
-	 * @param  string           $sortType
+	 * @param  string  $key
 	 * @return \Caffeinated\Menus\Builder
 	 */
-	public function sortBy($sortBy, $sortType = 'asc')
+	public function sortBy($key)
 	{
-		if (is_callable($sortBy)) {
-			$result = call_user_func($sortBy, $this->items->toArray());
+		$this->items = $this->items->sortBy(function($item) use ($key) {
+			return $item->$key;
+		});
 
-			if (! is_array($result)) {
-				$result = array($result);
-			}
+		return $this;
+	}
 
-			$this->items = new Collection($result);
-		}
-
-		$this->items->sort(function ($itemA, $itemB) use ($sortBy, $sortType) {
-			$itemA = $itemA->$sortBy;
-			$itemB = $itemB->$sortBy;
-
-			if ($itemA == $itemB) {
-				return 0;
-			}
-
-			if ($sortType == 'asc') {
-				return $itemA > $itemB ? 1 : -1;
-			}
-
-			return $itemA < $itemB ? 1 : -1;
+	/**
+	 * Sorts the menu based on key given in descending order.
+	 *
+	 * @param  string  $key
+	 * @return \Caffeinated\Menus\Builder
+	 */
+	public function sortByDesc($key)
+	{
+		$this->items = $this->items->sortByDesc(function($item) use ($key) {
+			return $item->$key;
 		});
 
 		return $this;

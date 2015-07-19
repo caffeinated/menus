@@ -218,7 +218,7 @@ class Item
 				break;
 
 			default:
-				$html = '';
+				$html = '<i class="'.$icon.'"></i>';
 				break;
 		}
 

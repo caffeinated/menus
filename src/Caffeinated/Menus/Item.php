@@ -335,7 +335,9 @@ class Item
 		$item->data('active', true);
 
 		if ($item->parent) {
-			$this->activate($this->builder->whereId($item->parent)->first());
+            $parent = $this->builder->whereId($item->parent)->first();
+            $parent->attributes['class'] = $parent->builder->formatGroupClass(['class' => 'opened'], $parent->attributes);
+			$this->activate($parent);
 		}
 	}
 

@@ -145,11 +145,20 @@ class Item
 	public function attribute($attribute, $value = null)
 	{
 		if (isset($attribute) and is_array($attribute)) {
+			if (array_key_exists('class', $attribute)) {
+				$this->attributes['class'] = $this->builder->formatGroupClass(['class' => $attribute['class']], $this->attributes);
+				unset ($attribute['class']);
+			}
+
 			$this->attributes = array_merge($this->attributes, $attribute);
 
 			return $this;
 		} elseif (isset($attribute) and isset($value)) {
-			$this->attributes[$attribute] = $value;
+			if ($attribute == 'class') {
+				$this->attributes['class'] = $this->builder->formatGroupClass(['class' => $value], $this->attributes);
+			} else {
+				$this->attributes[$attribute] = $value;
+			}
 
 			return $this;
 		}

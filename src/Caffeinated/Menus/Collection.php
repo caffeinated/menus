@@ -66,9 +66,10 @@ class Collection extends BaseCollection
 	 * Prepends text or HTML to the collection of items.
 	 *
 	 * @param  string  $html
+	 * @param  mixed  $key
 	 * @return \Caffeinated\Menus\Collection
 	 */
-	public function prepend($html)
+	public function prepend($html, $key = null)
 	{
 		$this->each(function($item) use ($html) {
 			$item->title = $html.$item->title;

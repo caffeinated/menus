@@ -43,7 +43,7 @@ class MenusServiceProvider extends ServiceProvider {
 		$this->app->register('Collective\Html\HtmlServiceProvider');
 
 		// Bind our Menu class to the IoC container
-		$this->app->bindShared('menu', function($app) {
+		$this->app->singleton('menu', function($app) {
 			return new Menu($app['config'], $app['view'], $app['html'], $app['url']);
 		});
 	}

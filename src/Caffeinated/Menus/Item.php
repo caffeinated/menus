@@ -226,6 +226,10 @@ class Item
 				$html = '<span class="glyphicon glyphicon-'.$icon.'" aria-hidden="true"></span>';
 				break;
 
+			case 'entypo':
+				$html = '<i class="entypo-'.$icon.'"></i>';
+				break;
+
 			default:
 				$html = '<i class="'.$icon.'"></i>';
 				break;

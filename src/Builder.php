@@ -475,10 +475,10 @@ class Builder
 	{
 		if (class_exists('Caffeinated\Shinobi\Shinobi')) {
 			$this->filter(function ($item) {
-	            if (! $item->data('can') and ! $item->data('canAtLeast')) {
+	            if (! $item->data('can') and ! $item->data('canatleast')) {
 	                return true;
-	            } elseif ($item->data('canAtLeast')) {
-					return \Shinobi::canAtLeast($item->data('canAtLeast'));
+	            } elseif ($item->data('canatleast')) {
+					return \Shinobi::canAtLeast($item->data('canatleast'));
 				} else {
 					return \Shinobi::can($item->data('can'));
 				}

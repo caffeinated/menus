@@ -378,7 +378,7 @@ class Item
 
 	public function canAtLeast($permissions)
 	{
-		return $this->data('canAtLeast', $permissions);
+		return $this->data('canatleast', $permissions);
 	}
 
 	/**

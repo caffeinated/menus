@@ -376,7 +376,7 @@ class Item
 		return $this->data('can', $permissions);
 	}
 
-	public function catAtLeast($permissions)
+	public function canAtLeast($permissions)
 	{
 		return $this->data('canAtLeast', $permissions);
 	}

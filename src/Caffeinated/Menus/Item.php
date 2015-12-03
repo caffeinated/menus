@@ -371,6 +371,16 @@ class Item
 		return $this;
 	}
 
+	public function can($permissions)
+	{
+		return $this->data('can', $permissions);
+	}
+
+	public function catAtLeast($permissions)
+	{
+		return $this->data('canAtLeast', $permissions);
+	}
+
 	/**
 	 * Return either a property or attribute item value.
 	 *

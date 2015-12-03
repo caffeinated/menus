@@ -507,6 +507,23 @@ class Builder
 		return $items;
 	}
 
+	public function guard()
+	{
+		if (class_exists('Caffeinated\Shinobi\Shinobi')) {
+			$this->filter(function ($item) {
+	            if (! $item->data('can') and ! $item->data('canAtLeast')) {
+	                return true;
+	            } elseif ($item->data('canAtLeast')) {
+					return \Shinobi::canAtLeast($item->data('canAtLeast'));
+				} else {
+					return \Shinobi::can($item->data('can'));
+				}
+	        });
+		}
+
+		return $this;
+	}
+
 	/**
 	 * Dynamic search method against a menu attribute.
 	 *

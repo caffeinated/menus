@@ -7,7 +7,7 @@ Caffeinated Menus
 
 Easily create dynamic menus from within your Laravel 5 application.
 
-Caffeinated Menus is originally based off of Lavary's [Laravel Menu](https://github.com/lavary/laravel-menu) package; rebuilt from the ground up (not necessarily a fork). This has a primary focus on Laravel 5 support with PSR coding standards. For a more robust and complete package, please go check out [Laravel Menu](https://github.com/lavary/laravel-menu)!
+Caffeinated Menus is originally based off of Lavary's [Laravel Menu](https://github.com/lavary/laravel-menu) package with support for the Caffeinated Shinobi package. For a more robust and complete package, please go check out [Laravel Menu](https://github.com/lavary/laravel-menu)!
 
 The package follows the FIG standards PSR-1, PSR-2, and PSR-4 to ensure a high level of interoperability between shared PHP code. At the moment the package is not unit tested, but is planned to be covered later down the road.
 

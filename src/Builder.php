@@ -13,7 +13,7 @@ class Builder
 	protected $items;
 
 	/**
-	 * @var \Collective\Html\HtmlBuilder
+	 * @var Collective\Html\HtmlBuilder
 	 */
 	protected $html;
 
@@ -38,17 +38,17 @@ class Builder
 	protected $lastId;
 
 	/**
-	 * @var \Illuminate\Routing\UrlGenerator
+	 * @var Illuminate\Routing\UrlGenerator
 	 */
 	protected $url;
 
 	/**
-	 * Constructor.
+	 * Create a new Builder instance.
 	 *
-	 * @param string                            $name
-	 * @param array                             $config
-	 * @param \Collective\Html\HtmlBuilder      $html
-	 * @param \Illuminate\Routing\UrlGenerator  $url
+	 * @param string                          $name
+	 * @param array                           $config
+	 * @param Collective\Html\HtmlBuilder     $html
+	 * @param Illuminate\Routing\UrlGenerator $url
 	 */
 	public function __construct($name, $config, HtmlBuilder $html, UrlGenerator $url)
 	{
@@ -62,9 +62,10 @@ class Builder
 	/**
 	 * Add an item to the defined menu.
 	 *
-	 * @param  string  $title
-	 * @param  array|string   $options
-	 * @return \Caffeinated\Menus\Item
+	 * @param  string       $title
+	 * @param  array|string $options
+	 *
+	 * @return Item
 	 */
 	public function add($title, $options = '')
 	{
@@ -90,7 +91,8 @@ class Builder
 	/**
 	 * Extract the valid attributes from the passed options.
 	 *
-	 * @param  array  $options
+	 * @param array $options
+	 *
 	 * @return array
 	 */
 	public function extractAttributes($options = array())
@@ -109,7 +111,8 @@ class Builder
 	/**
 	 * Converts the defined attributes into HTML.
 	 *
-	 * @param  array  $attributes
+	 * @param array $attributes
+	 *
 	 * @return string
 	 */
 	public function attributes($attributes = array())
@@ -120,7 +123,8 @@ class Builder
 	/**
 	 * Insert a divider after the item.
 	 *
-	 * @param  array  $attributes
+	 * @param array $attributes
+	 *
 	 * @return void
 	 */
 	public function divide($attributes = array())
@@ -133,7 +137,8 @@ class Builder
 	/**
 	 * Return the configuration value by key.
 	 *
-	 * @param  string  $key
+	 * @param string $key
+	 *
 	 * @return string
 	 */
 	public function config($key)
@@ -144,7 +149,7 @@ class Builder
 	/**
 	 * Get the prefix from the last group of the stack.
 	 *
-	 * @return string
+	 * @return mixed
 	 */
 	public function getLastGroupPrefix()
 	{
@@ -157,6 +162,8 @@ class Builder
 
 	/**
 	 * Format the groups class.
+	 *
+	 * @return mixed
 	 */
 	public static function formatGroupClass($new, $old)
 	{
@@ -199,7 +206,8 @@ class Builder
 	/**
 	 * Fetches and returns a menu item by it's slug.
 	 *
-	 * @param  string  $slug
+	 * @param string $slug
+	 *
 	 * @return Item
 	 */
 	public function get($slug)
@@ -210,7 +218,8 @@ class Builder
 	/**
 	 * Facade method for the get() method.
 	 *
-	 * @param  string  $slug
+	 * @param string $slug
+	 *
 	 * @return Item
 	 */
 	public function item($slug)
@@ -221,7 +230,8 @@ class Builder
 	/**
 	 * Fetches and returns a menu item by it's ID.
 	 *
-	 * @param  integer  $id
+	 * @param integer $id
+	 *
 	 * @return Item
 	 */
 	public function find($id)
@@ -277,7 +287,8 @@ class Builder
 	/**
 	 * Get the action type from the options.
 	 *
-	 * @param  array  $options
+	 * @param array $options
+	 *
 	 * @return string
 	 */
 	public function dispatch($options)
@@ -296,7 +307,8 @@ class Builder
 	/**
 	 * Get the action for a "url" option.
 	 *
-	 * @param  array|string  $options
+	 * @param array|string $options
+	 *
 	 * @return string
 	 */
 	protected function getUrl($options)
@@ -325,7 +337,8 @@ class Builder
 	/**
 	 * Get the route action for a "route" option.
 	 *
-	 * @param  array|string  $route
+	 * @param array|string $route
+	 *
 	 * @return string
 	 */
 	protected function getRoute($route)
@@ -340,7 +353,8 @@ class Builder
 	/**
 	 * Get the controller action for a "action" option.
 	 *
-	 * @param  array|string  $action
+	 * @param array|string $action
+	 *
 	 * @return string
 	 */
 	protected function getAction($action)
@@ -355,7 +369,8 @@ class Builder
 	/**
 	 * Determines if the given URL is absolute.
 	 *
-	 * @param  string  $url
+	 * @param string $url
+	 *
 	 * @return bool
 	 */
 	public static function isAbsolute($url)
@@ -377,7 +392,8 @@ class Builder
 	 * simply forward the callback to the Laravel Collection
 	 * filter() method and return the results.
 	 *
-	 * @param  callable  $callback
+	 * @param callable $callback
+	 *
 	 * @return Builder
 	 */
 	public function filter($callback)
@@ -392,8 +408,9 @@ class Builder
 	/**
 	 * Filter menu items recursively.
 	 *
-	 * @param  string  $attribute
-	 * @param  mixed   $value
+	 * @param string $attribute
+	 * @param mixed  $value
+	 *
 	 * @return Collection
 	 */
 	public function filterRecursively($attribute, $value)
@@ -420,8 +437,9 @@ class Builder
 	/**
 	 * Sorts the menu based on key given in ascending order.
 	 *
-	 * @param  string  $key
-	 * @return \Caffeinated\Menus\Builder
+	 * @param string $key
+	 *
+	 * @return Builder
 	 */
 	public function sortBy($key)
 	{
@@ -435,8 +453,9 @@ class Builder
 	/**
 	 * Sorts the menu based on key given in descending order.
 	 *
-	 * @param  string  $key
-	 * @return \Caffeinated\Menus\Builder
+	 * @param string $key
+	 *
+	 * @return Builder
 	 */
 	public function sortByDesc($key)
 	{
@@ -447,6 +466,12 @@ class Builder
 		return $this;
 	}
 
+	/**
+	 * Filter menu items based on Shinobi permissions.
+	 *
+	 * @return Builder
+	 */
+	 )
 	public function guard()
 	{
 		if (class_exists('Caffeinated\Shinobi\Shinobi')) {
@@ -467,9 +492,10 @@ class Builder
 	/**
 	 * Dynamic search method against a menu attribute.
 	 *
-	 * @param  string  $method
-	 * @param  array   $args
-	 * @return \Caffeinated\Menus\Item|bool
+	 * @param string $method
+	 * @param array  $args
+	 *
+	 * @return Item|bool
 	 */
 	public function __call($method, $args)
 	{
@@ -504,8 +530,9 @@ class Builder
 	/**
 	 * Returns menu item by name.
 	 *
-	 * @param  string  $property
-	 * @return \Caffeinated\Menus\Item
+	 * @param string $property
+	 *
+	 * @return Item
 	 */
 	public function __get($property)
 	{

@@ -471,7 +471,6 @@ class Builder
 	 *
 	 * @return Builder
 	 */
-	 )
 	public function guard()
 	{
 		if (class_exists('Caffeinated\Shinobi\Shinobi')) {

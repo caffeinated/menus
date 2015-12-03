@@ -30,11 +30,6 @@ class Builder
 	/**
 	 * @var array
 	 */
-	protected $groupStack = array();
-
-	/**
-	 * @var array
-	 */
 	protected $reserved = ['route', 'action', 'url', 'prefix', 'parent', 'secure', 'raw'];
 
 	/**

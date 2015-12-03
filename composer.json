@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Caffeinated\\Menus\\": "src/Caffeinated/Menus/"
+            "Caffeinated\\Menus\\": "src/"
         }
     }
 }

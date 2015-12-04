@@ -58,7 +58,7 @@ class Item
 		$this->builder    = $builder;
 		$this->id         = $id;
 		$this->title      = $title;
-		$this->slug       = str_slug($title, ' ');
+		$this->slug       = camel_case(str_slug($title, ' '));
 		$this->attributes = $this->builder->extractAttributes($options);
 		$this->parent     = (is_array($options) and isset($options['parent'])) ? $options['parent'] : null;
 

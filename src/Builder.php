@@ -488,6 +488,61 @@ class Builder
 		return $this;
 	}
 
+	/*
+	|--------------------------------------------------------------------------
+	| Rendering Methods
+	|--------------------------------------------------------------------------
+	|
+	*/
+
+	/**
+	 * Renders the menu as an unordered list.
+	 *
+	 * @param  array  $attributes
+	 * @return string
+	 */
+	public function asUl($attributes = array())
+	{
+		return "<ul{$this->attributes($attributes)}>{$this->render('ul')}</ul>";
+	}
+
+	/**
+	 * Generate the menu items as list items, recursively.
+	 *
+	 * @param  string  $type
+	 * @param  int     $parent
+	 * @return string
+	 */
+	protected function render($type = 'ul', $parent = null)
+	{
+		$items   = '';
+		$itemTag = in_array($type, ['ul', 'ol']) ? 'li' : $type;
+
+		foreach ($this->whereParent($parent) as $item) {
+			$items .= "<{$itemTag}{$item->attributes()}>";
+
+			if ($item->link) {
+				$items .= "<a{$this->attributes($item->link->attr())} href=\"{$item->url()}\">{$item->title}</a>";
+			} else {
+				$items .= $item->title;
+			}
+
+			if ($item->hasChildren()) {
+				$items .= "<{$type}>";
+				$items .= $this->render($type, $item->id);
+				$items .= "</{$type}>";
+			}
+
+			$items .= "</{$itemTag}>";
+
+			if ($item->divider) {
+				$items .= "<{$itemTag}{$this->attributes($item->divider)}></{$itemTag}>";
+			}
+		}
+
+		return $items;
+	}
+
 	/**
 	 * Dynamic search method against a menu attribute.
 	 *

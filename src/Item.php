@@ -359,7 +359,7 @@ class Item
 		if (! is_null($pattern)) {
 			$pattern = ltrim(preg_replace('/\/\*/', '(/.*)?', $pattern), '/');
 
-			if (preg_match("@^{$pattern}\z@", Request::path())) {
+			if (preg_match("@{$pattern}\z@", Request::path())) {
 				$this->activate();
 			}
 

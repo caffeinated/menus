@@ -333,8 +333,8 @@ class Item
 
 			list($path, $requestPath) = preg_replace('@^('.$base.')/@', '', [$path, $requestPath], 1);
 		}
-
-		if ($this->url() == Request::url()) {
+		
+		if ($this->url() == Request::url() || $this->url() == \URL::secure(Request::path())) {
 			$this->activate();
 		}
 	}
@@ -359,7 +359,7 @@ class Item
 		if (! is_null($pattern)) {
 			$pattern = ltrim(preg_replace('/\/\*/', '(/.*)?', $pattern), '/');
 
-			if (preg_match("@^{$pattern}\z@", Request::path())) {
+			if (preg_match("@{$pattern}\z@", Request::path())) {
 				$this->activate();
 			}
 

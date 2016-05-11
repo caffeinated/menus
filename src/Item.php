@@ -370,6 +370,16 @@ class Item
 
 		return $this;
 	}
+	
+	/**
+	 * Returns bool value if item is active or not.
+	 *
+	 * @return bool
+	 */
+	public function isActive()
+	{
+		return $this->data('active');
+	}
 
 	public function can($permissions)
 	{

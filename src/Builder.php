@@ -4,6 +4,7 @@ namespace Caffeinated\Menus;
 use BadMethodCallException;
 use Collective\Html\HtmlBuilder;
 use Illuminate\Routing\UrlGenerator;
+use Illuminate\Support\Str;
 
 class Builder
 {
@@ -556,7 +557,7 @@ class Builder
 		preg_match('/^[W|w]here([a-zA-Z0-9_]+)$/', $method, $matches);
 
 		if ($matches) {
-			$attribute = strtolower($matches[1]);
+			$attribute = Str::lower($matches[1]);
 		} else {
 			throw new BadMethodCallException('Call to undefined method '.$method);
 		}

@@ -1,7 +1,6 @@
 Caffeinated Menus
 =================
-[![Laravel 5.0](https://img.shields.io/badge/Laravel-5.0-orange.svg?style=flat-square)](http://laravel.com)
-[![Laravel 5.1](https://img.shields.io/badge/Laravel-5.1-orange.svg?style=flat-square)](http://laravel.com)
+[![Laravel 5.3](https://img.shields.io/badge/Laravel-5.3-orange.svg?style=flat-square)](http://laravel.com)
 [![Source](http://img.shields.io/badge/source-caffeinated/menus-blue.svg?style=flat-square)](https://github.com/caffeinated/menus)
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
 
@@ -20,7 +19,7 @@ Quick Installation
 Begin by installing the package through Composer.
 
 ```
-composer require caffeinated/menus=~2.0
+composer require caffeinated/menus
 ```
 
 Once this operation is complete, simply add the service provider class and facade alias to your project's `config/app.php` file:

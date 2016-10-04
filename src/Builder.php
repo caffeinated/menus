@@ -570,6 +570,10 @@ class Builder
 		}
 
 		return $this->items->filter(function($item) use ($attribute, $value) {
+			if (isset($item->data[$attribute]) && $item->data[$attribute] == $value) {
+				return true;
+			}
+			
 			if (! property_exists($item, $attribute)) {
 				return false;
 			}

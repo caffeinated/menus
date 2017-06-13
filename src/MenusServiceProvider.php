@@ -5,6 +5,10 @@ use Illuminate\Support\ServiceProvider;
 
 class MenusServiceProvider extends ServiceProvider {
 
+    public function boot()
+    {
+        $this->publishConfig();
+    }
 	/**
 	 * Indicates if loading of the provider is deferred.
 	 *
@@ -47,4 +51,11 @@ class MenusServiceProvider extends ServiceProvider {
 			return new Menu($app['config'], $app['view'], $app['html'], $app['url']);
 		});
 	}
+
+    protected function publishConfig()
+    {
+        $this->publishes([
+            __DIR__ . '/../config/menu.php' => config_path('menu.php'),
+        ], 'caffeinated-menu');
+    }
 }

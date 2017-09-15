@@ -420,7 +420,7 @@ class Builder
 
 		$this->items->each(function($item) use ($attribute, $value, &$collection) {
 			if (! property_exists($item, $attribute)) {
-				return $false;
+				return false;
 			}
 
 			if ($item->$attribute == $value) {

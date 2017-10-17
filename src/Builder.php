@@ -324,20 +324,24 @@ class Builder
         }
 
         $secure = (isset($options['secure']) and $options['secure'] === true) ? true : false;
+        
+        if ($prefix) {
+            $prefix = $prefix.'/';
+        }
 
         if (is_array($url)) {
             if (self::isAbsolute($url[0])) {
                 return $url[0];
             }
 
-            return $this->url->to($prefix.'/'.$url[0], array_slice($url, 1), $secure);
+            return $this->url->to($prefix.$url[0], array_slice($url, 1), $secure);
         }
 
         if (self::isAbsolute($url)) {
             return $url;
         }
 
-        return $this->url->to($prefix.'/'.$url, array(), $secure);
+        return $this->url->to($prefix.$url, array(), $secure);
     }
 
     /**

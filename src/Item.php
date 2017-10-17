@@ -178,7 +178,7 @@ class Item
                 return $this->link->href;
             }
 
-            return $this->builder->dispatch($this->link->path['url']);
+            return $this->builder->dispatch($this->link->path);
         }
     }
 

@@ -11,15 +11,28 @@
     ],
     "require": {
         "php": ">=5.6.4",
-        "illuminate/support": "5.3.*|5.4.*",
-        "illuminate/config": "5.3.*|5.4.*",
-        "illuminate/routing": "5.3.*|5.4.*",
-        "illuminate/view": "5.3.*|5.4.*",
-        "laravelcollective/html": "5.3.*|5.4.*"
+        "illuminate/support": "5.3.*|5.4.*|5.5.*",
+        "illuminate/config": "5.3.*|5.4.*|5.5.*",
+        "illuminate/routing": "5.3.*|5.4.*|5.5.*",
+        "illuminate/view": "5.3.*|5.4.*|5.5.*",
+        "laravelcollective/html": "5.3.*|5.4.*|5.5.*"
     },
     "autoload": {
         "psr-4": {
             "Caffeinated\\Menus\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.0-dev"
+        },
+        "laravel": {
+            "providers": [
+               "Caffeinated\\Menus\\MenusServiceProvider"
+            ],
+            "aliases": {
+                "Menu": "Caffeinated\\Menus\\Facades\\Menu"
+            }
         }
     }
 }

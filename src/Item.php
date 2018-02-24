@@ -235,7 +235,7 @@ class Item
                 break;
 
             default:
-                $html = '<i class="'.$npmicon.'"></i>';
+                $html = '<i class="'.$icon.'"></i>';
                 break;
         }
 

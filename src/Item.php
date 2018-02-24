@@ -230,8 +230,12 @@ class Item
                 $html = '<i class="entypo-'.$icon.'"></i>';
                 break;
 
+            case 'span':
+                $html = '<span class="'.$icon.'"></span>';
+                break;
+
             default:
-                $html = '<i class="'.$icon.'"></i>';
+                $html = '<i class="'.$npmicon.'"></i>';
                 break;
         }
 
@@ -333,7 +337,7 @@ class Item
 
             list($path, $requestPath) = preg_replace('@^('.$base.')/@', '', [$path, $requestPath], 1);
         }
-        
+
         if ($this->url() == Request::url() || $this->url() == \URL::secure(Request::path())) {
             $this->activate();
         }
@@ -370,7 +374,7 @@ class Item
 
         return $this;
     }
-    
+
     /**
      * Returns bool value if item is active or not.
      *

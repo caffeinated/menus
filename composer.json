@@ -1,12 +1,12 @@
 {
-    "name": "caffeinated/menus",
+    "name": "jigss1212/menus",
     "description": "Laravel 5 Menus",
-    "keywords": ["menu", "navigation", "laravel", "caffeinated"],
+    "keywords": ["menu", "navigation", "laravel", "caffeinated", "jigs1212"],
     "license": "MIT",
     "authors": [
         {
-            "name": "Shea Lewis",
-            "email": "shea.lewis89@gmail.com"
+            "name": "Jigar Lodaya",
+            "email": "jigar.lodaya12@gmail.com"
         }
     ],
     "require": {
@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Caffeinated\\Menus\\": "src/"
+            "jigs1212\\Menus\\": "src/"
         }
     },
     "extra": {
@@ -28,10 +28,10 @@
         },
         "laravel": {
             "providers": [
-               "Caffeinated\\Menus\\MenusServiceProvider"
+               "Jigs1212\\Menus\\MenusServiceProvider"
             ],
             "aliases": {
-                "Menu": "Caffeinated\\Menus\\Facades\\Menu"
+                "Menu": "Jigs1212\\Menus\\Facades\\Menu"
             }
         }
     }

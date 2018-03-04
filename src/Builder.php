@@ -1,5 +1,5 @@
 <?php
-namespace Caffeinated\Menus;
+namespace Jigs1212\Menus;
 
 use BadMethodCallException;
 use Collective\Html\HtmlBuilder;
@@ -12,7 +12,7 @@ class Builder
      * @var array
      */
     protected $items;
-    
+
     /**
      * @var array
      */
@@ -324,7 +324,7 @@ class Builder
         }
 
         $secure = (isset($options['secure']) and $options['secure'] === true) ? true : false;
-        
+
         if ($prefix) {
             $prefix = $prefix.'/';
         }
@@ -582,7 +582,7 @@ class Builder
             if (isset($item->data[$attribute]) && $item->data[$attribute] == $value) {
                 return true;
             }
-            
+
             if (! property_exists($item, $attribute)) {
                 return false;
             }

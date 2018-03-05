@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "jigs1212\\Menus\\": "src/"
+            "Jigs1212\\Menus\\": "src/"
         }
     },
     "extra": {

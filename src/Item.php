@@ -215,7 +215,7 @@ class Item
      * @param  string  $type  Can be either "fontawesome" or "glyphicon"
      * @return \Caffeinated\Menus\Item
      */
-    public function icon($icon, $type = 'fontawesome')
+    public function icon($icon, $type = 'span')
     {
         switch ($type) {
             case 'fontawesome':

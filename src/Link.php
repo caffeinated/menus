@@ -1,5 +1,5 @@
 <?php
-namespace Caffeinated\Menus;
+namespace Jigs1212\Menus;
 
 class Link
 {

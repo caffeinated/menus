@@ -1,25 +1,25 @@
 {
-    "name": "caffeinated/menus",
+    "name": "jigs1212/menus",
     "description": "Laravel 5 Menus",
-    "keywords": ["menu", "navigation", "laravel", "caffeinated"],
+    "keywords": ["menu", "navigation", "laravel", "caffeinated", "jigs1212"],
     "license": "MIT",
     "authors": [
         {
-            "name": "Shea Lewis",
-            "email": "shea.lewis89@gmail.com"
+            "name": "Jigar Lodaya",
+            "email": "jigar.lodaya12@gmail.com"
         }
     ],
     "require": {
         "php": ">=5.6.4",
-        "illuminate/support": "5.3.*|5.4.*|5.5.*",
-        "illuminate/config": "5.3.*|5.4.*|5.5.*",
-        "illuminate/routing": "5.3.*|5.4.*|5.5.*",
-        "illuminate/view": "5.3.*|5.4.*|5.5.*",
-        "laravelcollective/html": "5.3.*|5.4.*|5.5.*"
+        "illuminate/support": "^5.3",
+        "illuminate/config": "^5.3",
+        "illuminate/routing": "^5.3",
+        "illuminate/view": "^5.3",
+        "laravelcollective/html": "^5.3"
     },
     "autoload": {
         "psr-4": {
-            "Caffeinated\\Menus\\": "src/"
+            "Jigs1212\\Menus\\": "src/"
         }
     },
     "extra": {
@@ -28,10 +28,10 @@
         },
         "laravel": {
             "providers": [
-               "Caffeinated\\Menus\\MenusServiceProvider"
+               "Jigs1212\\Menus\\MenusServiceProvider"
             ],
             "aliases": {
-                "Menu": "Caffeinated\\Menus\\Facades\\Menu"
+                "Menu": "Jigs1212\\Menus\\Facades\\Menu"
             }
         }
     }

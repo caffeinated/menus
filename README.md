@@ -1,3 +1,37 @@
+
+
+This is originally develeoped at [Caffeinated Menus](https://github.com/caffeinated/menus). Modified to acheive my needs.
+
+
+For this package Installation guide
+==============================
+
+Begin by installing the package through Composer.
+
+```
+composer require jigs1212/menus
+```
+
+Once this operation is complete, simply add the service provider class and facade alias to your project's `config/app.php` file:
+
+#### Service Provider
+```php
+Jigs1212\Menus\MenusServiceProvider::class,
+```
+
+#### Facade
+```php
+'Menu' => Jigs1212\Menus\Facades\Menu::class,
+```
+
+And that's it! With your coffee in reach, start building out some awesome menus!
+
+
+
+
+ORIGINAL PACKAGE
+=================
+
 Caffeinated Menus
 =================
 [![Laravel 5.3](https://img.shields.io/badge/Laravel-5.3-orange.svg?style=flat-square)](http://laravel.com)

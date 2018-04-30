@@ -1,5 +1,5 @@
 <?php
-namespace Caffeinated\Menus;
+namespace Jigs1212\Menus;
 
 use Collective\Html\HtmlBuilder;
 use Illuminate\Config\Repository;

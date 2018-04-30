@@ -1,5 +1,5 @@
 <?php
-namespace Caffeinated\Menus;
+namespace Jigs1212\Menus;
 
 use Illuminate\Support\Facades\Request;
 
@@ -215,7 +215,7 @@ class Item
      * @param  string  $type  Can be either "fontawesome" or "glyphicon"
      * @return \Caffeinated\Menus\Item
      */
-    public function icon($icon, $type = 'fontawesome')
+    public function icon($icon, $type = 'span')
     {
         switch ($type) {
             case 'fontawesome':
@@ -228,6 +228,10 @@ class Item
 
             case 'entypo':
                 $html = '<i class="entypo-'.$icon.'"></i>';
+                break;
+
+            case 'span':
+                $html = '<span class="'.$icon.'"></span>';
                 break;
 
             default:
@@ -333,7 +337,7 @@ class Item
 
             list($path, $requestPath) = preg_replace('@^('.$base.')/@', '', [$path, $requestPath], 1);
         }
-        
+
         if ($this->url() == Request::url() || $this->url() == \URL::secure(Request::path())) {
             $this->activate();
         }
@@ -370,7 +374,7 @@ class Item
 
         return $this;
     }
-    
+
     /**
      * Returns bool value if item is active or not.
      *

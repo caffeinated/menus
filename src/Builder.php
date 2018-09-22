@@ -2,7 +2,6 @@
 namespace Caffeinated\Menus;
 
 use BadMethodCallException;
-use Collective\Html\HtmlBuilder;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Str;
 
@@ -17,11 +16,6 @@ class Builder
      * @var array
      */
     protected $groupStack = [];
-
-    /**
-     * @var Collective\Html\HtmlBuilder
-     */
-    protected $html;
 
     /**
      * @var string
@@ -53,14 +47,12 @@ class Builder
      *
      * @param string                          $name
      * @param array                           $config
-     * @param Collective\Html\HtmlBuilder     $html
      * @param Illuminate\Routing\UrlGenerator $url
      */
-    public function __construct($name, $config, HtmlBuilder $html, UrlGenerator $url)
+    public function __construct($name, $config, UrlGenerator $url)
     {
         $this->name   = $name;
         $this->config = $config;
-        $this->html   = $html;
         $this->url    = $url;
         $this->items  = new Collection;
     }
@@ -112,18 +104,6 @@ class Builder
         }
 
         return array();
-    }
-
-    /**
-     * Converts the defined attributes into HTML.
-     *
-     * @param array $attributes
-     *
-     * @return string
-     */
-    public function attributes($attributes = array())
-    {
-        return $this->html->attributes($attributes);
     }
 
     /**
@@ -496,63 +476,6 @@ class Builder
         }
 
         return $this;
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Rendering Methods
-    |--------------------------------------------------------------------------
-    |
-    */
-
-    /**
-     * Renders the menu as an unordered list.
-     *
-     * @deprecated
-     *
-     * @param  array  $attributes
-     * @return string
-     */
-    public function asUl($attributes = array())
-    {
-        return "<ul{$this->attributes($attributes)}>{$this->render('ul')}</ul>";
-    }
-
-    /**
-     * Generate the menu items as list items, recursively.
-     *
-     * @param  string  $type
-     * @param  int     $parent
-     * @return string
-     */
-    protected function render($type = 'ul', $parent = null)
-    {
-        $items   = '';
-        $itemTag = in_array($type, ['ul', 'ol']) ? 'li' : $type;
-
-        foreach ($this->whereParent($parent) as $item) {
-            $items .= "<{$itemTag}{$item->attributes()}>";
-
-            if ($item->link) {
-                $items .= "<a{$this->attributes($item->link->attr())} href=\"{$item->url()}\">{$item->title}</a>";
-            } else {
-                $items .= $item->title;
-            }
-
-            if ($item->hasChildren()) {
-                $items .= "<{$type}>";
-                $items .= $this->render($type, $item->id);
-                $items .= "</{$type}>";
-            }
-
-            $items .= "</{$itemTag}>";
-
-            if ($item->divider) {
-                $items .= "<{$itemTag}{$this->attributes($item->divider)}></{$itemTag}>";
-            }
-        }
-
-        return $items;
     }
 
     /**

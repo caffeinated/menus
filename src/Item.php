@@ -116,18 +116,6 @@ class Item
     }
 
     /**
-     * Fetch the formatted attributes for the item in HTML.
-     *
-     * @deprecated
-     *
-     * @return string
-     */
-    public function attributes()
-    {
-        return $this->builder->attributes($this->attributes);
-    }
-
-    /**
      * Get all attributes.
      *
      * @return array

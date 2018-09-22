@@ -118,6 +118,8 @@ class Item
     /**
      * Fetch the formatted attributes for the item in HTML.
      *
+     * @deprecated
+     *
      * @return string
      */
     public function attributes()
@@ -333,7 +335,7 @@ class Item
 
             list($path, $requestPath) = preg_replace('@^('.$base.')/@', '', [$path, $requestPath], 1);
         }
-        
+
         if ($this->url() == Request::url() || $this->url() == \URL::secure(Request::path())) {
             $this->activate();
         }
@@ -370,7 +372,7 @@ class Item
 
         return $this;
     }
-    
+
     /**
      * Returns bool value if item is active or not.
      *

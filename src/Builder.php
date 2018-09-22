@@ -12,7 +12,7 @@ class Builder
      * @var array
      */
     protected $items;
-    
+
     /**
      * @var array
      */
@@ -324,7 +324,7 @@ class Builder
         }
 
         $secure = (isset($options['secure']) and $options['secure'] === true) ? true : false;
-        
+
         if ($prefix) {
             $prefix = $prefix.'/';
         }
@@ -508,6 +508,8 @@ class Builder
     /**
      * Renders the menu as an unordered list.
      *
+     * @deprecated
+     *
      * @param  array  $attributes
      * @return string
      */
@@ -582,7 +584,7 @@ class Builder
             if (isset($item->data[$attribute]) && $item->data[$attribute] == $value) {
                 return true;
             }
-            
+
             if (! property_exists($item, $attribute)) {
                 return false;
             }

@@ -58,7 +58,7 @@ class Menu
 
 			$this->collection->put($name, $menu);
 
-			$this->view->share('menu_'.$name, $menu);
+			$this->view->share(config('menu.prepend','menu_').$name, $menu);
 
 			return $menu;
 		}

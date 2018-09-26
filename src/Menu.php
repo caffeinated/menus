@@ -1,7 +1,6 @@
 <?php
 namespace Caffeinated\Menus;
 
-use Collective\Html\HtmlBuilder;
 use Illuminate\Config\Repository;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\View\Factory;
@@ -19,11 +18,6 @@ class Menu
 	protected $config;
 
 	/**
-	 * @var \Collective\Html\HtmlBuilder
-	 */
-	protected $html;
-
-	/**
 	 * @var \Illuminate\Routing\UrlGenerator
 	 */
 	protected $url;
@@ -38,14 +32,12 @@ class Menu
 	 *
 	 * @param  \Illuminate\Config\Repository     $config
 	 * @param  \Illuminate\View\Factory          $view
-	 * @param  \Collective\Html\HtmlBuilder      $html
 	 * @param  \Illuminate\Routing\UrlGenerator  $url
 	 */
-	public function __construct(Repository $config, Factory $view, HtmlBuilder $html, UrlGenerator $url)
+	public function __construct(Repository $config, Factory $view, UrlGenerator $url)
 	{
 		$this->config     = $config;
 		$this->view       = $view;
-		$this->html       = $html;
 		$this->url        = $url;
 		$this->collection = new Collection;
 	}
@@ -60,7 +52,7 @@ class Menu
 	public function make($name, $callback)
 	{
 		if (is_callable($callback)) {
-			$menu = new Builder($name, $this->loadConfig($name), $this->html, $this->url);
+			$menu = new Builder($name, $this->loadConfig($name), $this->url);
 
 			call_user_func($callback, $menu);
 

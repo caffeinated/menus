@@ -41,7 +41,7 @@ class MenusServiceProvider extends ServiceProvider {
 	{
 		// Bind our Menu class to the IoC container
 		$this->app->singleton('menu', function($app) {
-			return new Menu($app['config'], $app['view'], $app['url']);
+			return new Menu($app['config']);
 		});
 	}
 }

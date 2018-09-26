@@ -2,8 +2,6 @@
 namespace Caffeinated\Menus;
 
 use Illuminate\Config\Repository;
-use Illuminate\Routing\UrlGenerator;
-use Illuminate\View\Factory;
 
 class Menu
 {
@@ -18,27 +16,13 @@ class Menu
 	protected $config;
 
 	/**
-	 * @var \Illuminate\Routing\UrlGenerator
-	 */
-	protected $url;
-
-	/**
-	 * @var \Illuminate\View\Factory
-	 */
-	protected $view;
-
-	/**
 	 * Constructor.
 	 *
 	 * @param  \Illuminate\Config\Repository     $config
-	 * @param  \Illuminate\View\Factory          $view
-	 * @param  \Illuminate\Routing\UrlGenerator  $url
 	 */
-	public function __construct(Repository $config, Factory $view, UrlGenerator $url)
+	public function __construct(Repository $config)
 	{
 		$this->config     = $config;
-		$this->view       = $view;
-		$this->url        = $url;
 		$this->collection = new Collection;
 	}
 
@@ -52,13 +36,13 @@ class Menu
 	public function make($name, $callback)
 	{
 		if (is_callable($callback)) {
-			$menu = new Builder($name, $this->loadConfig($name), $this->url);
+			$menu = new Builder($name, $this->loadConfig($name));
 
 			call_user_func($callback, $menu);
 
 			$this->collection->put($name, $menu);
 
-			$this->view->share('menu_'.$name, $menu);
+			view()->share('menu_'.$name, $menu);
 
 			return $menu;
 		}

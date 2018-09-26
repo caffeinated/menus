@@ -2,7 +2,6 @@
 namespace Caffeinated\Menus;
 
 use BadMethodCallException;
-use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Str;
 
 class Builder
@@ -38,22 +37,15 @@ class Builder
     protected $lastId;
 
     /**
-     * @var Illuminate\Routing\UrlGenerator
-     */
-    protected $url;
-
-    /**
      * Create a new Builder instance.
      *
-     * @param string                          $name
-     * @param array                           $config
-     * @param Illuminate\Routing\UrlGenerator $url
+     * @param string  $name
+     * @param array   $config
      */
-    public function __construct($name, $config, UrlGenerator $url)
+    public function __construct($name, $config)
     {
         $this->name   = $name;
         $this->config = $config;
-        $this->url    = $url;
         $this->items  = new Collection;
     }
 
@@ -314,14 +306,14 @@ class Builder
                 return $url[0];
             }
 
-            return $this->url->to($prefix.$url[0], array_slice($url, 1), $secure);
+            return url()->to($prefix.$url[0], array_slice($url, 1), $secure);
         }
 
         if (self::isAbsolute($url)) {
             return $url;
         }
 
-        return $this->url->to($prefix.$url, array(), $secure);
+        return url()->to($prefix.$url, array(), $secure);
     }
 
     /**
@@ -334,10 +326,10 @@ class Builder
     protected function getRoute($route)
     {
         if (is_array($route)) {
-            return $this->url->route($route[0], array_slice($route, 1));
+            return url()->route($route[0], array_slice($route, 1));
         }
 
-        return $this->url->route($route);
+        return url()->route($route);
     }
 
     /**
@@ -350,10 +342,10 @@ class Builder
     protected function getAction($action)
     {
         if (is_array($action)) {
-            return $this->url->action($action[0], array_slice($action, 1));
+            return url()->action($action[0], array_slice($action, 1));
         }
 
-        return $this->url->action($action);
+        return url()->action($action);
     }
 
     /**

@@ -3,10 +3,6 @@ Caffeinated Menus
 [![Source](http://img.shields.io/badge/source-caffeinated/menus-blue.svg?style=flat-square)](https://github.com/caffeinated/menus)
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
 
-## Announcements
-- Currently in the process of migrating documentation to a central location. It's a bit of a mess right now - my apologies.
-- I pushed a breaking change as a minor release - the offending release is [v3.3](https://github.com/caffeinated/menus/releases/tag/v3.3). To rectify this I will be rolling the removed functionaly back in as a new patch release and will tag the removed functionality as a new major release (v4.0).
-
 ---
 
 Easily create dynamic menus from within your Laravel 5 application.

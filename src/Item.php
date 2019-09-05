@@ -1,6 +1,8 @@
 <?php
 namespace Caffeinated\Menus;
 
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Request;
 
 class Item
@@ -58,7 +60,7 @@ class Item
         $this->builder    = $builder;
         $this->id         = $id;
         $this->title      = $title;
-        $this->slug       = camel_case(str_slug($title, ' '));
+        $this->slug       = Str::camel(Str::slug($title, ' '));
         $this->attributes = $this->builder->extractAttributes($options);
         $this->parent     = (is_array($options) and isset($options['parent'])) ? $options['parent'] : null;
 
@@ -83,7 +85,7 @@ class Item
         } elseif (isset($options['raw']) and $options['raw'] == true) {
             $path = null;
         } else {
-            $path = array_only($options, ['url', 'route', 'action', 'secure']);
+            $path = Arr::only($options, ['url', 'route', 'action', 'secure']);
         }
 
         if (! is_null($path)) {

@@ -2,6 +2,7 @@
 namespace Caffeinated\Menus;
 
 use BadMethodCallException;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 class Builder
@@ -92,7 +93,7 @@ class Builder
                 $options = $this->mergeWithLastGroup($options);
             }
 
-            return array_except($options, $this->reserved);
+            return Arr::except($options, $this->reserved);
         }
 
         return array();
@@ -132,7 +133,7 @@ class Builder
     public function getLastGroupPrefix()
     {
         if (count($this->groupStack) > 0) {
-            return array_get(last($this->groupStack), 'prefix', '');
+            return Arr::get(last($this->groupStack), 'prefix', '');
         }
 
         return null;
@@ -146,12 +147,12 @@ class Builder
     public static function formatGroupClass($new, $old)
     {
         if (isset($new['class'])) {
-            $classes = trim(trim(array_get($old, 'class')).' '.trim(array_get($new, 'class')));
+            $classes = trim(trim(Arr::get($old, 'class')).' '.trim(Arr::get($new, 'class')));
 
             return implode(' ', array_unique(explode(' ', $classes)));
         }
 
-        return array_get($old, 'class');
+        return Arr::get($old, 'class');
     }
 
     /*

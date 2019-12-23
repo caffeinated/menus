@@ -320,7 +320,7 @@ class Item
         $path        = ltrim(parse_url($this->url(), PHP_URL_PATH), '/');
         $requestPath = Request::path();
 
-        if ($this->builder->config['rest_base']) {
+        if (isset($this->builder->config) && $this->builder->config['rest_base']) {
             $base = (is_array($this->builder->config['rest_base'])) ? implode('|', $this->builder->config['rest_base']) : $this->builder->conf['rest_base'];
 
             list($path, $requestPath) = preg_replace('@^('.$base.')/@', '', [$path, $requestPath], 1);

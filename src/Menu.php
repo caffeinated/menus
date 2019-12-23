@@ -63,7 +63,7 @@ class Menu
 			return array_merge($options['default'], $options[$name]);
 		}
 
-		return $options['default'];
+		return $options['default'] ?? null;
 	}
 
 	/**
